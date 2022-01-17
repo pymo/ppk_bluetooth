@@ -1,2 +1,137 @@
-# ppk_bluetooth
-Bluetooth HID adapter for the Palm Portable Keyboard based on nRF52840
+# Palm Portable Keyboard bluetooth adapter
+
+This project is a DIY of a bluetooth adapter for the Palm Portable Keyboards (PPK), so you can use it with any phone, tablet or laptop that has bluetooth. The cost of the materials are around 30 US dollars.
+
+![Bluetooth Palm Portable Keyboard demo](/images/ppk_demo.jpg "Bluetooth Palm Portable Keyboard working with a phone")
+
+This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. It only works with the Palm III connector variant for now (black plastic, p/n P10713U). I might add support for the Palm V connector later.
+
+This project differs from the above two projects that it uses an Adafruit Feather nRF52840 Express board, which has Bluetooth 5.0 with BLE support. Compared to eixsting solutions, this solution has the following advantages:
+
+- Very power efficient (compared to ESP32), so we can use a much smaller Li-Po battery and the final product is smaller in size.
+- Easier to program and up-to-date bluetooth version (compared to ATmega16U4 + Bluetooth module)
+- Has built-in Li-Po charge circuit.
+
+It is however slightly more expensive and larger than some ESP32 boards, so that can be a down side.
+
+Bill of Materials
+----------
+- [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062)
+- About 26 AWG solid core wire (wires that used for breadboard are ideal, they have a tinned layer to prevent oxidize)
+- Some thin, flexable wire for battery and RX connection.
+- 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions)
+- Three 10K ohm resistors (two SMD, one axial)
+- One NPN transistor (I use 2N3904)
+- One switch (I use a tiny travel limit switch, Model No. MS-V-204F, you can use any switch, but you might need to modify the enclosure)
+- 3D printed enclosure (stl model is in this repo).
+- 4 screws with the lenth around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
+
+Schematic
+----------
+This solution uses the hardware serial port instead of software serial, so it's more power efficient (MCU can sleep more without constantly bit-banging the GPIO to emulate software serial). But the PPK speaks RS-232 instead of TTL, this mean we need to solder some extra components onto the board to make a voltage level inverter.
+
+![Schematic](/images/schematic.jpg "Schematic")
+
+![Circuit](/images/circuit.jpg "Actual circuit")
+
+Some notes about the schematic:
+
+- cy384 explained the keyboard's pinout in his [project page](https://github.com/cy384/ppk_usb/blob/master/README.md) very well.
+- Red dots are where the wires need to be soldered to the pad.
+- Though wires are soldered to pad A0, this GPIO is not used in our software, it is only soldered there to provide structural support of the wire.
+- A5 is the "GND" of the keyboard, we could have soldered it to the GND of the board, but then the position would be inconvinent. Instead we pull down A5 in software to act as GND.
+- R3 is a pull down resistor for the RTS line, it is required as per the keyboard manual. I choose a non-SMD resistor because it's physical dimention allows it to conveniently "jump" between A1 and A5.
+- I used a travel limit switch, because I can embed it inside the socketn which connects to the keyboard, so that it will be on automatically when the adapter is plugged in. However, this means the adapter can only be charged when it is plugged to the keyboard. If you don't want this quirky feature, you can use a normal switch and modify the enclosure.
+
+3D printed parts
+----------------
+See the stl files in 3d_print/ folder. It comes in three parts: the upper cap, the middle frame, and two buttons. The middle frame needs some support under the middle platform when printing.
+
+![Printed parts before assembly](/images/3d_print.jpg "Printed parts before assembly")
+
+Assembly and wiring
+-------------------
+
+Cut the single core wire into five 4cm sections, strip the insulation and solder it to pad [3V] [Gnd] [A0] [A1] [A3] [A5], respectively.
+
+![wiring pic](/images/wiring1.jpg)
+
+This is the most difficult step: place the transistor and R0, R1 on the board as shown below, and solder them according to the schematic. You have to place the component exactly like I did or it will not reach some pads. You can use thin strips of heat-resistant tape to help fix the components in place when soldering. Double check the connectivity of every junction with multi-meter to make sure there is no short nor disconnect.
+
+![wiring pic](/images/wiring2.jpg)
+
+Solder a thin wire from the R0-transistor connection to the [RX] pad.
+
+Solder R3 between A1 and A5 on the top of the board.
+
+![wiring pic](/images/wiring3.jpg)
+
+Solder the positive of the Li-Po battery to pad [Bat], the negative to one end of the switch, and the other end of the switch connects to the GND pad of the board as shown in the schematic. Make sure the wires to the switch are at least 5cm long, otherwise it may cause trouble during assemble.
+
+![wiring pic](/images/wiring4.jpg)
+
+Manage the wire so it is cleanly tucked on the back side of the board. Then use a double-sided tape to glue the battery to the back side of the board.
+
+![wiring pic](/images/wiring5.jpg)
+
+Put some glue and install the switch inside the middle frame, glue it in-place.
+
+![Glue the switch](/images/glue_switch.jpg)
+
+Put around 3mm of insulation on each of the wire, then insert the wires into the holes of the middle frame, make sure you are inserting them into the correct hole by cross-check with the schematic.
+
+![wiring pic](/images/wiring6.jpg)
+
+Bend the wire sticking out of the hole and fold it inside. This is what contacts with the keyboard connector.
+
+![wiring pic](/images/wiring7.jpg)
+
+Here is what the entire middle frame assembly looks like:
+
+![wiring pic](/images/middle_assembly.jpg)
+
+Place the two buttons into the upper cap, then push the middle frame assembly into the cap.
+
+![wiring pic](/images/upper_case.jpg)
+
+Screw the 4 screws, and you are done!
+
+![wiring pic](/images/screws.jpg)
+
+Fully assembled unit:
+
+![wiring pic](/images/front.jpg)
+
+![wiring pic](/images/charge_port.jpg)
+
+Programming
+-----------
+If you have never programmed the Adafruit Feather nRF52840 Express board before, please follow the following tutorial to try programming some basic examples.
+
+[https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather]
+
+Open up `blehid_keyboard.ino`. Set the device to Arduino Leonardo in the IDE, plug in your cable, and hit upload, wait for the programming is done. Then you can test it on the keyboard!
+
+Special Key mapping
+-----------
+- Fn+Tab for Escape
+- Fn+number keys for F1-F10, Fn+- for F11, Fn+= for F12
+- Fn+up for volume up, Fn+down for volume down
+- Fn+left for brightness down, and Fn+right for brightness up.
+- Cmd is mapped to super (aka Windows/Apple key).
+- Date is mapped to Home, Phone is mapped to End.
+- To Do is mapped to PageUp, Memo is mapped to PageDown.
+- Done is mapped to Insert.
+
+Adding to or modifying the mapping is straightforward, just edit the config_keymap and config_fnkeymap functions.
+
+Features and quirks
+---------------------
+- The red LED blinks when the battery is below 60%. It double-blinks when the battery is below 40%, and triple-blinks when the battery is below 20%.
+- Due to the way the switch is installed, the adapter can only be charged when it is plugged onto the keyboard.
+- It can only connect to one device at a time. It auto connects to the last device it is paired to (if that device is in range). You can manually disconnect it in the last connected device's operating system, then you can connect it to another device.
+- Long press the "Pair" key for 0.5s clears all the remembered device, then you can press "Reset" button to start the pairing again.
+- On some devices (my debian laptop and Oneplus 5T, for example), the key press have around 0.5s delay, which makes this unusable. I'm still investigating why.
+- The stand on the PPK itself can be used to support a phone. My phone is heavy (an iPhone 12 Pro Max) but it seems to support it OK.
+
+![Bluetooth Palm Portable Keyboard's stand supporting an iPhone](/images/ppk_demo_iphone.jpg "Bluetooth Palm Portable Keyboard working with a phone")
