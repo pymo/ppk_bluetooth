@@ -50,7 +50,6 @@
 
 BLEDis bledis;
 BLEHidAdafruit blehid;
-BLEBas blebas;    // BAS (Battery Service) helper class instance
 
 // convenience masks
 #define UPDOWN_MASK 0b10000000
@@ -392,6 +391,9 @@ void DisconnectAll() {
 void setup()
 {
   pinMode(PAIR_BUTTON, INPUT_PULLUP);
+  // The adapter may have just been plugged in and is not fully contacting
+  // with the keyboard's golden finger yet. Wait for 0.5s before doing anything.
+  delay(500);
 
 #ifdef PPK_DEBUG
   Serial.begin(115200);
@@ -420,9 +422,6 @@ void setup()
   bledis.setManufacturer("Adafruit Industries");
   bledis.setModel("Palm Portable Keyboard");
   bledis.begin();
-
-  blebas.begin();
-  blebas.write(100);
 
   blehid.begin();
 
@@ -628,7 +627,6 @@ void CheckBatteryWithInterval() {
   Serial.print(battery_volt);
   Serial.println(" V");
 #endif
-  blebas.write(battery_level);
   if (battery_level >= 60)led_pattern = LED_NO_BLINK;
   else if (battery_level >= 40 && battery_level < 60)led_pattern = LED_BLINK_ONCE;
   else if (battery_level >= 20 && battery_level < 40)led_pattern = LED_BLINK_TWICE;
@@ -700,7 +698,8 @@ void loop()
   CheckBatteryWithInterval();
   HandleLedBlink();
   // Delay a bit after a loop to save power. We don't need too frequent key detection.
-  delay(5);
+  // The hardware reference of PPK says "Filters Key Bounce: 15 - 25 milliseconds".
+  delay(15);
 }
 
 /**

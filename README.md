@@ -6,17 +6,17 @@ This project is a DIY bluetooth adapter for the Palm Portable Keyboards (PPK), s
 
 This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. It only works with the Palm III connector variant for now (black plastic, p/n P10713U). I might add support for the Palm V connector later.
 
-This project differs from the above two projects in that it uses an Adafruit Feather nRF52840 Express board, which has Bluetooth 5.0 with BLE support. Compared to existing solutions, this solution has the following advantages:
+This project differs from the above two projects in that it uses an Adafruit Feather nRF52840 Express board, which has Bluetooth 5.0 with BLE support. Compared to existing solutions, this board has the following advantages:
 
 - Very power efficient (compared to ESP32), so we can use a much smaller Li-Po battery and the final product is smaller in size.
 - Easier to program and up-to-date bluetooth version (compared to ATmega16U4 + Bluetooth module)
-- Has a built-in Li-Po charge circuit.
+- Has a built-in Li-Po charge circuit and a battery voltage reading pin.
 
 The board is however slightly more expensive and larger than some ESP32 boards, so that can be a downside.
 
 Bill of Materials
 ----------
-- [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062)
+- [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) board
 - About 26 AWG solid core wire (wires that used for breadboard are ideal, they have a tinned layer to prevent oxidize)
 - Some thin, flexible wire for battery and RX connection.
 - 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions)
@@ -49,7 +49,7 @@ See the stl files in 3d_print/ folder. It comes in three parts: the upper cap, t
 
 ![Printed parts before assembly](/images/3d_print.jpg "Printed parts before assembly")
 
-I used [Tinkercad](https://www.tinkercad.com/) to create these models. If you are interested in modifying the models, you can visit this link: (https://www.tinkercad.com/things/cnyYmhGWcyD)
+I used [Tinkercad](https://www.tinkercad.com/) to create these models. If you are interested in modifying the models, you can visit this link: https://www.tinkercad.com/things/cnyYmhGWcyD
 
 Assembly and wiring
 -------------------
@@ -110,7 +110,7 @@ Programming
 -----------
 If you have never programmed the Adafruit Feather nRF52840 Express board before, please follow the official tutorial to try programming some basic examples.
 
-(https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather)
+https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather
 
 Once you know how to program the nRF52840, open up `blehid_keyboard.ino`. Set the device to Arduino Leonardo in the IDE, plug in your cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
 
@@ -132,7 +132,7 @@ Features and quirks
 - The red LED blinks when the battery is below 60%. It double-blinks when the battery is below 40%, and triple-blinks when the battery is below 20%.
 - Due to the way the switch is installed, the adapter can only be charged when it is plugged onto the keyboard.
 - It can only connect to one device at a time. It auto connects to the last device it is paired to (if that device is in range). You can manually disconnect it in the last connected device's operating system, then you can connect it to another device.
-- Long press the "Pair" key for 0.5s clears all the remembered devices, then you can press the "Reset" button to start the pairing again.
+- If you want to forget the paired devices on the adapter, long press the "Pair" key for 0.5s to clear all the remembered devices, then you can press the "Reset" button to start the pairing again.
 - On some devices (my Thinkpad laptop with Debian,  and Oneplus 5T, for example), the key presses have around 0.5s delay, which makes this unusable. I'm still investigating why.
 - The stand on the PPK itself can be used to support a phone. My phone is heavy (an iPhone 12 Pro Max) but it seems to support it OK.
 
