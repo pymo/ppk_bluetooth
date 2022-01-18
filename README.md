@@ -20,10 +20,10 @@ Bill of Materials
 - About 26 AWG solid core wire (wires that used for breadboard are ideal, they have a tinned layer to prevent oxidize)
 - Some thin, flexible wire for battery and RX connection.
 - 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions)
-- Three 10K ohm resistors (two SMD, one axial)
-- One NPN transistor (I use 2N3904)
-- One switch (I use a tiny travel limit switch, Model No. MS-V-204F, you can use any switch, but you might need to modify the enclosure)
-- 3D printed enclosure (stl model is in this repo).
+- Three 10K ohm resistors (two SMD 0805 size, one axial)
+- One NPN transistor in SMD package (I use 2N3904)
+- One switch (I use a tiny travel limit switch, model No. [MS-V-204F](https://www.aliexpress.com/i/33050912782.html), you can use any switch, but you might need to modify the enclosure)
+- 3D printed enclosure (stl models are in the 3d_print/ folder).
 - 4 screws with the length around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
 
 Schematic
@@ -40,7 +40,7 @@ Some notes about the schematic:
 - Red dots are where the wires need to be soldered to the pad.
 - Though wires are soldered to pad A0, this GPIO is not used in our software, it is only soldered there to provide structural support of the wire.
 - A5 is the "GND" of the keyboard, we could have soldered it to the GND of the board, but then the position would be inconvenient. Instead we pull down A5 in software to act as GND.
-- R3 is a pull down resistor for the RTS line, it is required as per the keyboard manual. I chose a non-SMD resistor because it's physical dimension allows it to conveniently "jump" between A1 and A5.
+- R2 is a pull down resistor for the RTS line, it is required as per the keyboard manual. I chose an axial resistor because its physical length allows it to conveniently "jump" between A0 and A5.
 - I used a travel limit switch, because I can embed it inside the socket which connects to the keyboard, so that it will be on automatically when the adapter is plugged in. However, this means the adapter can only be charged when it is plugged to the keyboard. If you don't want this quirky feature, you can use a normal switch and modify the enclosure.
 
 3D printed parts
@@ -64,7 +64,7 @@ This is the most difficult step: place the transistor and R0, R1 on the board as
 
 Solder a thin wire from the R0-transistor connection to the [RX] pad.
 
-Solder R3 between A1 and A5 on the top of the board.
+Solder R2 between [A0] and [A5] on the top of the board. I would recommend putting a heat-shrink tube on the resistor to prevent shorting with the A1 and A3 pin.
 
 ![wiring pic](/images/wiring3.jpg)
 
