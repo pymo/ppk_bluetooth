@@ -390,6 +390,7 @@ void DisconnectAll() {
 
 void setup()
 {
+  ledOff( LED_RED );
   pinMode(PAIR_BUTTON, INPUT_PULLUP);
   // The adapter may have just been plugged in and is not fully contacting
   // with the keyboard's golden finger yet. Wait for 0.5s before doing anything.
@@ -413,16 +414,23 @@ void setup()
 
   Bluefruit.begin();
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Palm Portable Keyboard");
+  Bluefruit.setName("Palm Keyboard");
 
   Bluefruit.Periph.setConnectCallback(prph_connect_callback);
   Bluefruit.Periph.setDisconnectCallback(prph_disconnect_callback);
 
   // Configure and Start Device Information Service
   bledis.setManufacturer("Adafruit Industries");
-  bledis.setModel("Palm Portable Keyboard");
+  bledis.setModel("Palm Keyboard");
   bledis.begin();
 
+  /* Start BLE HID
+   * Note: Apple requires BLE device must have min connection interval >= 20m
+   * ( The smaller the connection interval the faster we could send data).
+   * However for HID and MIDI device, Apple could accept min connection interval 
+   * up to 11.25 ms. Therefore BLEHidAdafruit::begin() will try to set the min and max
+   * connection interval to 11.25  ms and 15 ms respectively for best performance.
+   */
   blehid.begin();
 
   // Set callback for set LED from central
@@ -440,6 +448,11 @@ void setup()
   config_fnkeymap();
   boot_keyboard();
 
+  /* Set connection interval (min, max) to your perferred value.
+   * Note: It is already set by BLEHidAdafruit::begin() to 11.25ms - 15ms
+   * min = 9*1.25=11.25 ms, max = 12*1.25= 15 ms 
+   */
+  //Bluefruit.Periph.setConnInterval(9, 16);
 #ifdef PPK_DEBUG
   Serial.println("setup completed");
 #endif
@@ -584,6 +597,7 @@ void HandleKeyEvent(char key_byte) {
     else if (masked_key_byte == 0b01010010)usage_code = HID_USAGE_CONSUMER_VOLUME_DECREMENT; // down arrow
     else if (masked_key_byte == 0b01010011)usage_code = HID_USAGE_CONSUMER_BRIGHTNESS_INCREMENT; // right arrow
     else if (masked_key_byte == 0b01001001)usage_code = HID_USAGE_CONSUMER_VOLUME_INCREMENT; // up arrow
+    else if (masked_key_byte == 0b00001000)usage_code = HID_USAGE_CONSUMER_AC_HOME; // Fn+CMD=iOS Home button
     if (usage_code) {
       if (key_up) blehid.consumerKeyRelease();
       else blehid.consumerKeyPress(usage_code);

@@ -38,7 +38,7 @@ Some notes about the schematic:
 
 - cy384 explained the keyboard's pinout in his [project page](https://github.com/cy384/ppk_usb/blob/master/README.md) very well.
 - Red dots are where the wires need to be soldered to the pad.
-- Though wires are soldered to pad A0, this GPIO is not used in our software, it is only soldered there to provide structural support of the wire.
+- Though wires are soldered to pad A0, this GPIO is not used in the software, it is only soldered there to provide structural support of the wire.
 - A5 is the "GND" of the keyboard, we could have soldered it to the GND of the board, but then the position would be inconvenient. Instead we pull down A5 in software to act as GND.
 - R2 is a pull down resistor for the RTS line, it is required as per the keyboard manual. I chose an axial resistor because its physical length allows it to conveniently "jump" between A0 and A5.
 - I used a travel limit switch, because I can embed it inside the socket which connects to the keyboard, so that it will be on automatically when the adapter is plugged in. However, this means the adapter can only be charged when it is plugged to the keyboard. If you don't want this quirky feature, you can use a normal switch and modify the enclosure.
@@ -80,7 +80,7 @@ Put some glue and install the switch inside the middle frame, glue it in-place.
 
 ![Glue the switch](/images/glue_switch.jpg)
 
-Put around 3 mm of insulation on each of the wires, then insert the wires into the holes of the middle frame, make sure you are inserting them into the correct hole by cross-check with the schematic.
+Put around 4 mm of insulation on each of the wires, then insert the wires into the holes of the middle frame, make sure you are inserting them into the correct hole by cross-check with the schematic.
 
 ![wiring pic](/images/wiring6.jpg)
 
@@ -133,7 +133,16 @@ Features and quirks
 - Due to the way the switch is installed, the adapter can only be charged when it is plugged onto the keyboard.
 - It can only connect to one device at a time. It auto connects to the last device it is paired to (if that device is in range). You can manually disconnect it in the last connected device's operating system, then you can connect it to another device.
 - If you want to forget the paired devices on the adapter, long press the "Pair" key for 0.5s to clear all the remembered devices, then you can press the "Reset" button to start the pairing again.
-- On some devices (my Thinkpad laptop with Debian,  and Oneplus 5T, for example), the key presses have around 0.5s delay, which makes this unusable. I'm still investigating why.
-- The stand on the PPK itself can be used to support a phone. My phone is heavy (an iPhone 12 Pro Max) but it seems to support it OK.
+- The stand on the PPK itself can be used to support a phone. My phone is heavy (an iPhone 12 Pro Max) but it seems to support it OK. A TPU/rubber phone case would be ideal to prevent sliding.
 
 ![Bluetooth Palm Portable Keyboard's stand supporting an iPhone](/images/ppk_demo_iphone.jpg "Bluetooth Palm Portable Keyboard working with a phone")
+
+Possible improvements
+---------------------
+
+On some devices (my Thinkpad laptop with Debian,  and Oneplus 5T, for example), the key presses have around 0.5s delay, which makes this unusable. I'm still investigating why.
+
+Sometimes the battery indication LED won't blink unless we are typing, this might be due to the MCU is sleeping. I didn't look deep into that.
+
+I'm looking if I can integrate this with a proper keyboard firmware, such as [BlueMicro BLE](https://github.com/jpconstantineau/BlueMicro_BLE), to support better features like USB HID and battery service, and get rid of the quirkiness of the current code.
+
