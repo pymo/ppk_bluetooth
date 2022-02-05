@@ -4,9 +4,9 @@ This project is a DIY bluetooth adapter for the Palm Portable Keyboards (PPK), s
 
 ![Bluetooth Palm Portable Keyboard demo](/images/ppk_demo.jpg "Bluetooth Palm Portable Keyboard working with a phone")
 
-This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. It works with the Palm III connector variant for now (black plastic, p/n P10713U). I will add the 3d model for the Palm V connector soon. Other variants of this keyboard (connectors for M500, Handspring Visor, HP Jornada, etc.) are not supported .
+This project works with the Palm III keyboard (black plastic, p/n P10713U) and the Palm V keyboard (dark grey metal, p/n 3C10439). You need to print different middle frames for these two, but the circuit/firmware are the same. Other variants of this keyboard (connectors for Palm M500, Handspring Visor, HP Jornada, Compaq iPaq PocketPC etc.) are not supported.
 
-This project differs from the above two projects in that it uses an Adafruit Feather nRF52840 Express board, which has Bluetooth 5.0 with BLE support. Compared to existing solutions, this board has the following advantages:
+This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. It differs from the above two projects in that it uses an Adafruit Feather nRF52840 Express board, which has Bluetooth 5.0 with BLE support. Compared to existing solutions, this board has the following advantages:
 
 - Very power efficient (compared to ESP32), so we can use a much smaller Li-Po battery and the final product is smaller in size.
 - Easier to program and up-to-date bluetooth version (compared to ATmega16U4 + Bluetooth module)
