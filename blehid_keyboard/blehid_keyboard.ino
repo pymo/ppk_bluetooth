@@ -14,39 +14,17 @@
 #include <bluefruit.h>
 #include "Adafruit_TinyUSB.h"
 
-// set to 3 for III hardware, or 5 for V hardware
-#define PPK_VERSION 3
-
 // Define to enable debug mode, which notes to the arduino console at 115200
 // Comment out to disable debug mode.
 // #define PPK_DEBUG
 
-#if PPK_VERSION == 3
 #define RTS_PIN       PIN_A1
 #define DCD_PIN       PIN_A3
 #define GND_PIN       PIN_A5
-#endif
-
-#if PPK_VERSION == 5
-#define VCC_PIN       7
-#define RX_PIN        8
-#define RTS_PIN       5
-#define DCD_PIN       4
-#define GND_PIN       2
-#endif
 
 #define PAIR_BUTTON PIN_BUTTON1
 #define BTN_ACTIVE LOW
 #define BATTERY_ADC_PIN PIN_A6
-
-#if (PPK_VERSION != 3) && (PPK_VERSION != 5)
-#error
-#error
-#error    you did not set your ppk version!
-#error    read the instructions or read the code!
-#error
-#error
-#endif
 
 BLEDis bledis;
 BLEHidAdafruit blehid;
@@ -438,11 +416,6 @@ void setup()
 
   // Set up and start advertising
   startAdv();
-
-#ifdef PPK_DEBUG
-  Serial.print("compiled in debug mode with PPK_VERSION ");
-  Serial.println(PPK_VERSION);
-#endif
 
   config_keymap();
   config_fnkeymap();

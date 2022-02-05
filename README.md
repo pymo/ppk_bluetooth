@@ -120,6 +120,7 @@ Special Key mapping
 - Fn+number keys for F1-F10, Fn+- for F11, Fn+= for F12
 - Fn+up for volume up, Fn+down for volume down
 - Fn+left for brightness down, and Fn+right for brightness up.
+- Fn+Cmd is Homepage key (Home button in iOS).
 - Cmd is mapped to super (aka Windows/Apple key).
 - Date is mapped to Home, Phone is mapped to End.
 - To Do is mapped to PageUp, Memo is mapped to PageDown.
