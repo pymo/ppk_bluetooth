@@ -2,7 +2,10 @@
 
 This project is a DIY bluetooth adapter for the Palm Portable Keyboards (PPK), so you can use it with any phone, tablet or laptop that has bluetooth. The cost of the materials are around 30 US dollars.
 
-![Bluetooth Palm Portable Keyboard demo](/images/ppk_demo.jpg "Bluetooth Palm Portable Keyboard working with a phone")
+Demo on Youtube:
+
+[![Bluetooth Palm Portable Keyboard demo](http://img.youtube.com/vi/o8ccRMmagCI/0.jpg)](http://www.youtube.com/watch?v=o8ccRMmagCI "Converting a Palm Portable Keyboard into a Bluetooth keyboard!
+")
 
 This project works with the Palm III keyboard (black plastic, p/n P10713U) and the Palm V keyboard (dark grey metal, p/n 3C10439). You need to print different middle frames for these two, but the circuit/firmware are the same. Other variants of this keyboard (connectors for Palm M500, Handspring Visor, HP Jornada, Compaq iPaq PocketPC etc.) are not supported.
 
