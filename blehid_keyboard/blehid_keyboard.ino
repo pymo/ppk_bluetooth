@@ -29,12 +29,11 @@
 BLEDis bledis;
 BLEHidAdafruit blehid;
 
-// convenience masks
-#define UPDOWN_MASK 0b10000000
-#define MAP_MASK    0b01111111
-
 // wait this many milliseconds before making sure keyboard is still awake
 #define TIMEOUT 500000
+
+// wait for this many milliseconds before sending the last key up event.
+#define COALESCE_WAIT 30
 
 // macro for testing if a char is printable ASCII
 #define PRINTABLE_CHAR(x) ((x >= 32) && (x <= 126))
@@ -50,15 +49,6 @@ typedef enum LedBlinkPattern {
 
 char key_map[128] = { 0 };
 char fn_key_map[128] = { 0 };
-
-char last_byte = 0;
-char key_byte = 0;
-
-uint8_t modifier = 0;
-#define MAX_KEY_BUFFER 6
-uint8_t key_report_buffer[MAX_KEY_BUFFER] = { HID_KEY_NONE };
-int key_report_size = 0;
-bool fn_key_down = false;
 
 unsigned long last_comm = 0;
 
@@ -403,12 +393,12 @@ void setup()
   bledis.begin();
 
   /* Start BLE HID
-   * Note: Apple requires BLE device must have min connection interval >= 20m
-   * ( The smaller the connection interval the faster we could send data).
-   * However for HID and MIDI device, Apple could accept min connection interval 
-   * up to 11.25 ms. Therefore BLEHidAdafruit::begin() will try to set the min and max
-   * connection interval to 11.25  ms and 15 ms respectively for best performance.
-   */
+     Note: Apple requires BLE device must have min connection interval >= 20m
+     ( The smaller the connection interval the faster we could send data).
+     However for HID and MIDI device, Apple could accept min connection interval
+     up to 11.25 ms. Therefore BLEHidAdafruit::begin() will try to set the min and max
+     connection interval to 11.25  ms and 15 ms respectively for best performance.
+  */
   blehid.begin();
 
   // Set callback for set LED from central
@@ -422,9 +412,9 @@ void setup()
   boot_keyboard();
 
   /* Set connection interval (min, max) to your perferred value.
-   * Note: It is already set by BLEHidAdafruit::begin() to 11.25ms - 15ms
-   * min = 9*1.25=11.25 ms, max = 12*1.25= 15 ms 
-   */
+     Note: It is already set by BLEHidAdafruit::begin() to 11.25ms - 15ms
+     min = 9*1.25=11.25 ms, max = 12*1.25= 15 ms
+  */
   //Bluefruit.Periph.setConnInterval(9, 16);
 #ifdef PPK_DEBUG
   Serial.println("setup completed");
@@ -450,44 +440,6 @@ void startAdv(void)
   Bluefruit.Advertising.setFastTimeout(30);      // number of seconds in fast mode
   Bluefruit.Advertising.start(0);                // 0 = Don't stop advertising after n seconds
 }
-
-void ReportKeyUpDownEvent(uint8_t key_code, bool key_up) {
-  if (key_up)
-  {
-    // Removes the keycode from key_report_buffer if found.
-    for (int i = 0; i < key_report_size; ++i) {
-      if (key_report_buffer[i] == key_code) {
-        // Shifts the remaining reports left to fill in the blank
-        int j = i + 1;
-        while (j < key_report_size) {
-          key_report_buffer[j - 1] = key_report_buffer[j];
-          ++j;
-        }
-        key_report_buffer[j - 1] = HID_KEY_NONE;
-        --key_report_size;
-      }
-    }
-  }
-  else
-  {
-    // Adds the keycode to the end of key_report_buffer.
-    if (key_report_size < MAX_KEY_BUFFER) {
-      key_report_buffer[key_report_size] = key_code;
-      ++key_report_size;
-    }
-  }
-  if (key_report_size > 0) blehid.keyboardReport(modifier, key_report_buffer);
-  else ResetKeyUpDownEvent();
-  //if(TinyUSBDevice.mounted()){}
-}
-
-void ResetKeyUpDownEvent() {
-  blehid.keyRelease();
-  // reset report
-  key_report_size = 0;
-  memset(key_report_buffer, HID_KEY_NONE, MAX_KEY_BUFFER);
-}
-
 
 unsigned long last_pair_pushed = 0;
 bool pair_triggered = false;
@@ -528,11 +480,84 @@ void HandlePairButton() {
   }
 }
 
-void HandleKeyEvent(char key_byte) {
+uint8_t last_byte = 0;
+uint8_t last_key_up_code = 0;
+bool key_up_coalescing = false;
+
+#define MAX_KEY_BUFFER 6
+uint8_t key_report_buffer[MAX_KEY_BUFFER] = { HID_KEY_NONE };
+int key_report_size = 0;
+bool fn_key_down = false;
+
+void ReportKeyUpDownEvent(uint8_t key_code, bool key_up) {
+  if (key_up)  {
+    last_key_up_code = key_code;
+    // Removes the keycode from key_report_buffer if found.
+    for (int i = 0; i < key_report_size; ++i) {
+      if (key_report_buffer[i] == key_code) {
+        // Shifts the remaining reports left to fill in the blank
+        int j = i + 1;
+        while (j < key_report_size) {
+          key_report_buffer[j - 1] = key_report_buffer[j];
+          ++j;
+        }
+        key_report_buffer[j - 1] = HID_KEY_NONE;
+        --key_report_size;
+      }
+    }
+    // We don't immediatelly report the keyup, we wait for the next key down or the coalesing timer to report it.
+    key_up_coalescing = true;
+  }  else  {
+    // If the same key was released before and that event was coalesced,
+    // force send the last key up event, otherwise the host sees the same
+    // key_down event twice.
+    if (key_up_coalescing && key_code == last_key_up_code && key_report_size == 0) {
+      SendKeyEvents();
+    }
+    // Adds the keycode to the end of key_report_buffer.
+    if (key_report_size < MAX_KEY_BUFFER) {
+      key_report_buffer[key_report_size] = key_code;
+      ++key_report_size;
+    }
+    SendKeyEvents();
+  }
+  //if(TinyUSBDevice.mounted()){}
+}
+
+void ResetKeyUpDownEvent() {
+  // reset report
+  key_report_size = 0;
+  memset(key_report_buffer, HID_KEY_NONE, MAX_KEY_BUFFER);
+}
+
+void SendKeyEvents() {
+  if (key_report_size > 0) {
+#ifdef PPK_DEBUG
+    Serial.print("key code ");
+    for (int i=0;i<key_report_size;++i){
+      Serial.print(key_report_buffer[i]);
+      Serial.print(" ");
+    }
+    Serial.println("");
+#endif
+    blehid.keyboardReport(/*modifier=*/0, key_report_buffer);
+  } else {
+    blehid.keyRelease();
+#ifdef PPK_DEBUG
+    Serial.println("All key up");
+#endif
+  }
+  key_up_coalescing = false;
+}
+// convenience masks
+#define UPDOWN_MASK 0b10000000
+#define MAP_MASK    0b01111111
+
+void HandleKeyEvent(uint8_t key_byte) {
 
   bool key_up = ((key_byte & UPDOWN_MASK) != 0);
-  char masked_key_byte = key_byte & MAP_MASK;
-  char key_code = 0;
+  uint8_t masked_key_byte = key_byte & MAP_MASK;
+  uint8_t key_code = 0;
 
   if (fn_key_down) {
     if (fn_key_map[masked_key_byte]) key_code = fn_key_map[masked_key_byte];
@@ -546,18 +571,11 @@ void HandleKeyEvent(char key_byte) {
   }
   else
   {
-#ifdef PPK_DEBUG
-    print_keychange(masked_key_byte, key_code, key_up);
-#endif
-    if (key_code != 0)
-    {
+    if (key_code != 0) {
       ReportKeyUpDownEvent(key_code, key_up);
-    }
-    else
-    {
+    } else {
       // special case the Fn key
-      if ((masked_key_byte) == 34)
-      {
+      if ((masked_key_byte) == 34) {
         fn_key_down = !key_up;
       }
     }
@@ -671,16 +689,17 @@ void loop()
       HandleKeyEvent(Serial1.read());
     }
   }
-  else
-  {
-    // reboot if no recent comms, otherwise keyboard falls asleep
-    if ((millis() - last_comm) > TIMEOUT) {
+  // If the last key up event is under coalescing, send it after a certain wait time.
+  if (key_up_coalescing && ((millis() - last_comm) > COALESCE_WAIT)) {
+    SendKeyEvents();
+  }
+  // reboot if no recent comms, otherwise keyboard falls asleep
+  if ((millis() - last_comm) > TIMEOUT) {
 #ifdef PPK_DEBUG
-      Serial.println("rebooting keyboard for timeout");
+    Serial.println("rebooting keyboard for timeout");
 #endif
-      digitalWrite(GND_PIN, HIGH);
-      boot_keyboard();
-    }
+    digitalWrite(GND_PIN, HIGH);
+    boot_keyboard();
   }
   CheckBatteryWithInterval();
   HandleLedBlink();
@@ -698,19 +717,20 @@ void loop()
 */
 void set_keyboard_led(uint16_t conn_handle, uint8_t led_bitmap)
 {
-  (void) conn_handle;
+  /*  (void) conn_handle;
 
-#ifdef PPK_DEBUG
-  Serial.print("led_bitmap = ");
-  Serial.println(led_bitmap);
-#endif
-  // light up Red Led if any bits is set
-  if ( led_bitmap )
-  {
-    ledOn( LED_RED );
-  }
-  else
-  {
-    ledOff( LED_RED );
-  }
+    #ifdef PPK_DEBUG
+    Serial.print("led_bitmap = ");
+    Serial.println(led_bitmap);
+    #endif
+    // light up Red Led if any bits is set
+    if ( led_bitmap )
+    {
+      ledOn( LED_RED );
+    }
+    else
+    {
+      ledOff( LED_RED );
+    }
+  */
 }
