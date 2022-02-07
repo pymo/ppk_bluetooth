@@ -141,9 +141,8 @@ Features and quirks
 Possible improvements
 ---------------------
 
-On some devices (my Thinkpad laptop with Debian,  and Oneplus 5T, for example), the key presses have around 0.5s delay, which makes this unusable. I'm still investigating why.
+On some devices (my Thinkpad laptop with Debian, and Oneplus 5T, for example), the host receives key reports very slowly. I have added a coalescing mechanism to alleviate it. But the reason of the slowness is still unkown.
 
-Sometimes the battery indication LED won't blink unless we are typing, this might be due to the MCU is sleeping. I didn't look deep into that.
 
-I'm looking if I can integrate this with a proper keyboard firmware, such as [BlueMicro BLE](https://github.com/jpconstantineau/BlueMicro_BLE), to support better features like USB HID and battery service, and get rid of the quirkiness of the current code.
+I'm looking if I can integrate this with a proper keyboard firmware, such as [BlueMicro BLE](https://github.com/jpconstantineau/BlueMicro_BLE), to support better features like USB HID and battery service.
 
