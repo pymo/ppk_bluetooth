@@ -7,7 +7,9 @@ Demo on Youtube:
 [![Bluetooth Palm Portable Keyboard demo](http://img.youtube.com/vi/o8ccRMmagCI/0.jpg)](http://www.youtube.com/watch?v=o8ccRMmagCI "Converting a Palm Portable Keyboard into a Bluetooth keyboard!
 ")
 
-This project works with the Palm III keyboard (black plastic, p/n P10713U) and the Palm V keyboard (dark grey metal, p/n 3C10439). You need to print different middle frames for these two, but the circuit/firmware are the same. Other variants of this keyboard (connectors for Palm M500, Handspring Visor, HP Jornada, Compaq iPaq PocketPC etc.) are not supported.
+[Hackaday blog post](https://hackaday.com/2022/02/08/palm-portable-keyboard-goes-wireless/) about this project.
+
+This project works with the Palm III keyboard (black plastic, p/n P10713U) and the Palm V keyboard (dark grey metal, p/n 3C10439). The 3D printed middle frames between these two are different, but the circuit/firmware are the same. Other variants of this keyboard (connectors for Palm M500, Handspring Visor, HP Jornada, Compaq iPaq PocketPC, or IrDA version etc.) are not supported.
 
 This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. It differs from the above two projects in that it uses an Adafruit Feather nRF52840 Express board, which has Bluetooth 5.0 with BLE support. Compared to existing solutions, this board has the following advantages:
 
@@ -15,14 +17,14 @@ This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK 
 - Easier to program and up-to-date bluetooth version (compared to ATmega16U4 + Bluetooth module)
 - Has a built-in Li-Po charge circuit and a battery voltage reading pin.
 
-The board is however slightly more expensive and larger than some ESP32 boards, so that can be a downside.
+The board is however slightly more expensive than some ESP32 boards, so that can be a downside.
 
 Bill of Materials
 ----------
-- [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) board
+- [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) board ($24.95)
 - About 26 AWG solid core wire (wires that used for breadboard are ideal, they have a tinned layer to prevent oxidize)
 - Some thin, flexible wire for battery and RX connection.
-- 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions)
+- 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions). (The enclosure is specifically designed for this battery size. If you want a larger battery, you may need to modify the enclosure.)
 - Three 10K ohm resistors (two SMD 0805 size, one axial)
 - One NPN transistor in SMD package (I use 2N3904)
 - One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/i/32918743539.html), you can use any other switch, but you need to modify the enclosure)
@@ -39,7 +41,7 @@ This solution uses the hardware serial port instead of software serial, so it's 
 
 Some notes about the schematic:
 
-- cy384 explained the keyboard's pinout in his [project page](https://github.com/cy384/ppk_usb/blob/master/README.md) very well.
+- cy384 explained the keyboard's pinout and protocol in his [project page](http://www.cy384.com/projects/palm-keyboard.html) very well. And here is the official [Hardware and Electronics Reference](http://www.splorp.com/pdf/stowawayhwref.pdf) for the keyboard.
 - Red dots are where the wires need to be soldered to the pad.
 - Though wires are soldered to pad A0, this GPIO is not used in the software, it is only soldered there to provide structural support of the wire.
 - A5 is the "GND" of the keyboard, we could have soldered it to the GND of the board, but then the position would be inconvenient. Instead we pull down A5 in software to act as GND.
@@ -115,7 +117,7 @@ If you have never programmed the Adafruit Feather nRF52840 Express board before,
 
 https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather
 
-Once you know how to program the nRF52840, open up `blehid_keyboard.ino`. Set the device to "Arduino Feather nRF52840 Express" in the IDE, plug in the Micro USB cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
+Once you know how to program the nRF52840, open up `blehid_keyboard.ino`, plug in the Micro USB cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
 
 Special Key mapping
 -----------
