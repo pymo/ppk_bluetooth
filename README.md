@@ -25,7 +25,7 @@ Bill of Materials
 - 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions)
 - Three 10K ohm resistors (two SMD 0805 size, one axial)
 - One NPN transistor in SMD package (I use 2N3904)
-- One switch (I use a tiny travel limit switch, model No. [MS-V-204F](https://www.aliexpress.com/i/33050912782.html), you can use any switch, but you might need to modify the enclosure)
+- One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/i/32918743539.html), you can use any other switch, but you need to modify the enclosure)
 - 3D printed enclosure (stl models are in the 3d_print/ folder).
 - 4 screws with the length around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
 
@@ -52,12 +52,12 @@ See the stl files in 3d_print/ folder. It comes in three parts: the upper cap, t
 
 ![Printed parts before assembly](/images/3d_print.jpg "Printed parts before assembly")
 
-I used [Tinkercad](https://www.tinkercad.com/) to create these models. If you are interested in modifying the models, you can visit this link: https://www.tinkercad.com/things/cnyYmhGWcyD
+I used [Tinkercad](https://www.tinkercad.com/) to create these models. If you are interested in modifying the 3D models, you can visit this link: https://www.tinkercad.com/things/cnyYmhGWcyD
 
 Assembly and wiring
 -------------------
 
-Cut the single core wire into five 4cm sections, strip the insulation and solder it to pad [3V] [Gnd] [A0] [A1] [A3] [A5], respectively.
+Cut the single core wire into five 4cm sections, strip the insulation and solder it to pad [3V] [A0] [A1] [A3] [A5], respectively.
 
 ![wiring pic](/images/wiring1.jpg)
 
@@ -115,28 +115,29 @@ If you have never programmed the Adafruit Feather nRF52840 Express board before,
 
 https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather
 
-Once you know how to program the nRF52840, open up `blehid_keyboard.ino`. Set the device to Arduino Leonardo in the IDE, plug in your cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
+Once you know how to program the nRF52840, open up `blehid_keyboard.ino`. Set the device to "Arduino Feather nRF52840 Express" in the IDE, plug in the Micro USB cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
 
 Special Key mapping
 -----------
-- Fn+Tab for Escape
+- Fn+Tab for Esc
 - Fn+number keys for F1-F10, Fn+- for F11, Fn+= for F12
 - Fn+up for volume up, Fn+down for volume down
 - Fn+left for brightness down, and Fn+right for brightness up.
 - Fn+Cmd is Homepage key (Home button in iOS).
 - Cmd is mapped to super (aka Windows/Apple key).
 - Date is mapped to Home, Phone is mapped to End.
-- To Do is mapped to PageUp, Memo is mapped to PageDown.
+- To-Do is mapped to PageUp, Memo is mapped to PageDown.
 - Done is mapped to Insert.
 
-Adding to or modifying the mapping is straightforward, just edit the config_keymap and config_fnkeymap functions.
+Adding to or modifying the mapping is straightforward, just edit the `config_keymap` and `config_fnkeymap` functions.
 
 Features and quirks
 ---------------------
 - The red LED blinks when the battery is below 60%. It double-blinks when the battery is below 40%, and triple-blinks when the battery is below 20%.
+- Long press the "PAIR" button for 1 second to clear all the remembered devices on the adapter, then you can press the "RESET" button to start the pairing again.
+- Press both the "RESET" and "PAIR" button and release both, the board enters DFU mode to allow force firmware update, this is useful if the current firmware is corrupted.
 - Due to the way the switch is installed, the adapter can only be charged when it is plugged onto the keyboard.
 - It can only connect to one device at a time. It auto connects to the last device it is paired to (if that device is in range). You can manually disconnect it in the last connected device's operating system, then you can connect it to another device.
-- If you want to forget the paired devices on the adapter, long press the "Pair" key for 0.5s to clear all the remembered devices, then you can press the "Reset" button to start the pairing again.
 - The stand on the PPK itself can be used to support a phone. My phone is heavy (an iPhone 12 Pro Max) but it seems to support it OK. A TPU/rubber phone case would be ideal to prevent sliding.
 
 ![Bluetooth Palm Portable Keyboard's stand supporting an iPhone](/images/ppk_demo_iphone.jpg "Bluetooth Palm Portable Keyboard working with a phone")
@@ -144,8 +145,9 @@ Features and quirks
 Possible improvements
 ---------------------
 
-On some devices (my Thinkpad laptop with Debian, and Oneplus 5T, for example), the host receives key reports very slowly. I have added a coalescing mechanism to alleviate it. But the reason of the slowness is still unkown.
+On some devices (my Thinkpad laptop with Debian, and Oneplus 5T, for example), the host receives key reports very slowly (almost as low as 10 reports per second). I have added a coalescing method in the software to alleviate it. But the reason of the slowness is still unkown. If you know why the slowness happens, please let me know by opening an issue.
 
+It's possible to support USB HID, so it can be used with both USB and Bluetooth, and even switch on-the-fly by hot-keys.
 
-I'm looking if I can integrate this with a proper keyboard firmware, such as [BlueMicro BLE](https://github.com/jpconstantineau/BlueMicro_BLE), to support better features like USB HID and battery service.
+Adding support for battery service is also possible.
 
