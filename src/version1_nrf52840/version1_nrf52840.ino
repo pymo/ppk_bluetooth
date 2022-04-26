@@ -192,48 +192,6 @@ void config_fnkeymap()
   fn_key_map[0b00110001] = HID_KEY_F12; // =
 }
 
-void print_byte_bin(char bin_byte)
-{
-  Serial.print("0b");
-
-  for (int i = 7; i > -1; i--) Serial.print(int((bin_byte & (1 << i)) >> i));
-}
-
-void print_keychange(char key_byte, char key_code, int key_up)
-{
-  if (key_up) Serial.print("released: "); else Serial.print("pressed:  ");
-  print_byte_bin(key_byte);
-
-  Serial.print(" mapped to ");
-
-  if (key_code)
-  {
-    print_byte_bin(key_code);
-
-    if (PRINTABLE_CHAR(key_code))
-    {
-      Serial.print(" (");
-      Serial.print(key_code);
-      Serial.print(")");
-    }
-    else
-    {
-      Serial.print(" (unprintable)");
-    }
-  }
-  // Fn has no keycode, special case it
-  else if (key_byte == 34)
-  {
-    Serial.print("Fn");
-  }
-  else
-  {
-    Serial.print("nothing");
-  }
-
-  Serial.println("");
-}
-
 void boot_keyboard()
 {
 #ifdef PPK_DEBUG
@@ -247,7 +205,7 @@ void boot_keyboard()
   digitalWrite(GND_PIN, LOW);
 
 #ifdef PPK_DEBUG
-  Serial.print("waiting for keyboard response...");
+  Serial.print("waiting for DCD_PIN response...");
 #endif
 
   while (digitalRead(DCD_PIN) != HIGH) {
@@ -280,7 +238,7 @@ void boot_keyboard()
   }
 
 #ifdef PPK_DEBUG
-  Serial.print("waiting for keyboard serial ID...");
+  Serial.print("waiting for keyboard serial ID... ");
 #endif
 
   delay(10);
@@ -291,7 +249,8 @@ void boot_keyboard()
       byte1 = byte2;
       byte2 = Serial1.read();
 #ifdef PPK_DEBUG
-      Serial.println(byte2);
+      Serial.print(byte2);
+      Serial.print(" ");
 #endif
     }
     if ((byte1 == 0xFA) && (byte2 == 0xFD)) break;
@@ -505,13 +464,15 @@ void ReportKeyUpDownEvent(uint8_t key_code, bool key_up) {
         --key_report_size;
       }
     }
-    // We don't immediatelly report the keyup, we wait for the next key down or the coalesing timer to report it.
+    // On some hosts, the receiving rate is low. To reduce the number of key events,
+    // we don't immediatelly report the keyup, we wait for the next key down
+    // or until the coalesing timeout to report it.
     key_up_coalescing = true;
   }  else  {
     // If the same key was released before and that event was coalesced,
     // force send the last key up event, otherwise the host sees the same
     // key_down event twice.
-    if (key_up_coalescing && key_code == last_key_up_code && key_report_size == 0) {
+    if (key_up_coalescing && key_code == last_key_up_code) {
       SendKeyEvents();
     }
     // Adds the keycode to the end of key_report_buffer.
@@ -642,10 +603,11 @@ void CheckBatteryWithInterval() {
 #define BLINK_CYCLE 3000 //3 seconds
 #define BLINK_LENGTH 50 //milliseconds
 unsigned long last_cycle_start_timestamp = 0;
+unsigned long current_time = 0;
 bool led_is_on = false;
 
 void HandleLedBlink() {
-  int current_time = millis();
+  current_time = millis();
   //  | On | Off | On | Off |
   if (led_pattern >= LED_BLINK_ONCE && (current_time - last_cycle_start_timestamp) > BLINK_CYCLE) { // Overdue for the next cycle, turn on the LED
     if (!led_is_on) {
