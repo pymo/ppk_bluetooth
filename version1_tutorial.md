@@ -16,9 +16,9 @@ Schematic
 ----------
 This solution uses the hardware serial port instead of software serial, so it's more power efficient (MCU can sleep more without constantly bit-banging the GPIO to emulate software serial). But the PPK speaks RS-232 instead of TTL, this means we need to solder some extra components onto the board to make a voltage level inverter.
 
-![Schematic](/images/schematic.jpg "Schematic")
+![Schematic](/images/version1/schematic.jpg "Schematic")
 
-![Circuit](/images/circuit.jpg "Actual circuit")
+![Circuit](/images/version1/circuit.jpg "Actual circuit")
 
 Some notes about the schematic:
 
@@ -33,7 +33,7 @@ Some notes about the schematic:
 ----------------
 See the stl files in 3d_print/ folder. It comes in three parts: the upper cap, the middle frame, and two buttons. The middle frame needs some support under the middle platform when printing.
 
-![Printed parts before assembly](/images/3d_print.jpg "Printed parts before assembly")
+![Printed parts before assembly](/images/version1/3d_print.jpg "Printed parts before assembly")
 
 I used [Tinkercad](https://www.tinkercad.com/) to create these models. If you are interested in modifying the 3D models, you can visit this link: https://www.tinkercad.com/things/cnyYmhGWcyD
 
@@ -42,55 +42,55 @@ Assembly and wiring
 
 Cut the single core wire into five 4cm sections, strip the insulation and solder it to pad [3V] [A0] [A1] [A3] [A5], respectively.
 
-![wiring pic](/images/wiring1.jpg)
+![wiring pic](/images/version1/wiring1.jpg)
 
 This is the most difficult step: place the transistor and R0, R1 on the board as shown below, and solder them according to the schematic. You have to place the component exactly like I did or it will not reach some pads. You can use thin strips of heat-resistant tape to help fix the components in place when soldering. Double check the connectivity of every junction with multi-meter to make sure there is no short nor disconnect.
 
-![wiring pic](/images/wiring2.jpg)
+![wiring pic](/images/version1/wiring2.jpg)
 
 Solder a thin wire from the R0-transistor connection to the [RX] pad.
 
 Solder R2 between [A0] and [A5] on the top of the board. I would recommend putting a heat-shrink tube on the resistor to prevent shorting with the A1 and A3 pin.
 
-![wiring pic](/images/wiring3.jpg)
+![wiring pic](/images/version1/wiring3.jpg)
 
 Solder the positive of the Li-Po battery to pad [Bat], the negative to one end of the switch, and the other end of the switch connects to the GND pad of the board as shown in the schematic. Make sure the wires to the switch are at least 5cm long, otherwise it may cause trouble during assembly.
 
-![wiring pic](/images/wiring4.jpg)
+![wiring pic](/images/version1/wiring4.jpg)
 
 Manage the wire so it is cleanly tucked on the back side of the board. Then use a double-sided tape to glue the battery to the back side of the board.
 
-![wiring pic](/images/wiring5.jpg)
+![wiring pic](/images/version1/wiring5.jpg)
 
 Put some glue and install the switch inside the middle frame, glue it in-place.
 
-![Glue the switch](/images/glue_switch.jpg)
+![Glue the switch](/images/version1/glue_switch.jpg)
 
 Put around 4 mm of insulation on each of the wires, then insert the wires into the holes of the middle frame, make sure you are inserting them into the correct hole by cross-check with the schematic.
 
-![wiring pic](/images/wiring6.jpg)
+![wiring pic](/images/version1/wiring6.jpg)
 
 Bend the wire sticking out of the hole and fold it inside. This is what contacts the keyboard connector.
 
-![wiring pic](/images/wiring7.jpg)
+![wiring pic](/images/version1/wiring7.jpg)
 
 Here is what the entire middle frame assembly looks like:
 
-![wiring pic](/images/middle_assembly.jpg)
+![wiring pic](/images/version1/middle_assembly.jpg)
 
 Place the two buttons into the upper cap, then push the middle frame assembly into the cap. Make sure it is the correct orientation (the buttons should align with the buttons on the board).
 
-![wiring pic](/images/upper_case.jpg)
+![wiring pic](/images/version1/upper_case.jpg)
 
 Screw the 4 screws, and you are done!
 
-![wiring pic](/images/screws.jpg)
+![wiring pic](/images/version1/screws.jpg)
 
 Fully assembled unit:
 
-![wiring pic](/images/front.jpg)
+![wiring pic](/images/version1/front.jpg)
 
-![wiring pic](/images/charge_port.jpg)
+![wiring pic](/images/version1/charge_port.jpg)
 
 Programming
 -----------

@@ -29,8 +29,6 @@ See the stl files in 3d_print/ folder. It comes in 4 parts: the upper cap, the m
 
 ![Printed parts before assembly](/images/version2/3d_print.jpg "Printed parts before assembly")
 
-I used [Tinkercad](https://www.tinkercad.com/) to create these models. If you are interested in modifying the 3D models, you can visit this link: https://www.tinkercad.com/things/cnyYmhGWcyD
-
 Assembly and wiring
 -------------------
 
@@ -50,15 +48,11 @@ Handspring: solder the wires to pin [4] [6] [10].
 
 Solder two wires to the pad where the switch was, and the other ends of wires to the travel limit switch we provided.
 
-![wiring pic](/images/version2/wiring3.jpg)
-
 Solder the positive of the Li-Po battery to pad [+], the negative to the [GND] pad.
-
-![wiring pic](/images/version2/wiring4.jpg)
 
 Use a double-sided tape to glue the battery spacer to the back side of the board, then use a double-sided tape to glue the battery to the battery spacer.
 
-![wiring pic](/images/version2/wiring5.jpg)
+![wiring pic](/images/version2/wiring3.jpg)
 
 Put some glue and install the switch inside the middle frame, glue it in-place.
 
@@ -70,7 +64,7 @@ Insert the wires into the holes of the middle frame, make sure you are inserting
 
 Trim and bend the wire, and fold them inside. This is what contacts the keyboard connector.
 
-![wiring pic](/images/version2/wiring7.jpg)
+![wiring pic](/images/version1/wiring7.jpg)
 
 Glue the two board clips to the middle frame, the board clips hold the board like this:
 
@@ -78,17 +72,9 @@ Glue the two board clips to the middle frame, the board clips hold the board lik
 
 Put the cap over the middle frame. Make sure it is the correct orientation (the USB type-C port should align with the opening on the cap).
 
-![wiring pic](/images/version2/upper_case.jpg)
-
 Screw the 2 screws, and you are done!
 
-![wiring pic](/images/version2/screws.jpg)
-
-Fully assembled unit:
-
-![wiring pic](/images/version2/front.jpg)
-
-![wiring pic](/images/version2/charge_port.jpg)
+![wiring pic](/images/version2/upper_case.jpg)
 
 Programming
 -----------
