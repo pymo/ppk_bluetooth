@@ -1,4 +1,4 @@
-/**
+ /**
    This code converts the Palm Portable Keyboard's output into bluetooth.
    See https://github.com/pymo/ppk_bluetooth for details.
 
@@ -421,15 +421,6 @@ void HandleKeyEvent(uint8_t key_byte) {
 unsigned long last_battery_check_time = 0;
 
 /*
-float volt_per_lsb = 2 * 3.3F / 4095.0F; // 12-bit ADC with 3.3V max voltage,
-with 50% divider.
-//  The ADC on this board is not very accurate, a correction ratio needs to be
-//  multiplied to get the correct voltage reading. This ratio may be different
-//  for each board, and need to be calibrated for each board.
-float adc_correction_ratio = 1.03616F;
-float adc_correction_const = -0.937F;
-// batVolt has voltage levels every 5% of charge level. Got this through
-// experiment.
 float batVolt_lookup[] =
  {3, 3.35, 3.45, 3.49, 3.53, 3.57, 3.58, 3.59, 3.61, 3.63, 3.65, 3.68, 3.73,
   3.78, 3.82, 3.87, 3.91, 3.96, 4.02, 4.09, 4.17};
@@ -443,9 +434,9 @@ float batVolt_lookup[] =
 // If you are using a different ESP32 board, you may need to change this table.
 // This lookup table must have 21 entries. Each entry must be different,
 // otherwise we will have divide-by-zero error below.
-int bat_percent_lookup[] = {2000, 2330, 2380, 2410, 2420, 2460, 2475,
-                            2490, 2500, 2515, 2530, 2550, 2580, 2620,
-                            2650, 2670, 2710, 2740, 2780, 2820, 2870};
+int bat_percent_lookup[] = {2000, 2340, 2390, 2420, 2450, 2475, 2490,
+                            2505, 2520, 2530, 2550, 2570, 2600, 2645,
+                            2675, 2705, 2740, 2770, 2805, 2845, 2905};
 LedBlinkPattern battery_led_pattern = LED_NO_BLINK;
 
 void CheckBatteryWithInterval() {
@@ -455,11 +446,11 @@ void CheckBatteryWithInterval() {
     return;
 
   int raw_bat_data = analogRead(BATTERY_ADC_PIN);
-  // float battery_volt = (float)raw_data * volt_per_lsb * adc_correction_ratio
-  // + adc_correction_const;
-  // char volt_str[50];
-  // sprintf(volt_str, "%d ", raw_data);
-  // PrintStringToKeyboard(volt_str);
+/*
+  char volt_str[50];
+  sprintf(volt_str, "%d ", raw_bat_data);
+  PrintStringToKeyboard(volt_str);
+*/
   int battery_level = -1;  // percentage of the battery
   int n;
   for (n = 0; n <= 20; n++) {
@@ -608,6 +599,7 @@ void loop() {
   // Sleep the board if the keyboard has been idling for a long time
   bool keyboard_rebooted_in_this_cycle;
   keyboard_rebooted_in_this_cycle = false;
+
   if ((millis() - last_comm) > IDLE_TIMEOUT) {
     esp_sleep_wakeup_cause_t wakeup_reason = SleepAndWaitForWakeUp();
     switch (wakeup_reason) {
@@ -639,6 +631,7 @@ void loop() {
         break;
     }
   }
+
   // reboot if no recent keypress, otherwise keyboard falls asleep
   if (!keyboard_rebooted_in_this_cycle &&
       (millis() - last_pressed) > KEEPALIVE_TIMEOUT) {
@@ -657,4 +650,3 @@ void loop() {
   // milliseconds".
   delay(25);
 }
-

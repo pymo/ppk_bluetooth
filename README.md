@@ -2,14 +2,14 @@
 
 This project is a DIY bluetooth adapter for the Palm Portable Keyboards (PPK), so you can use it with any phone, tablet or laptop that supports BLE (i.e. Bluetooth 4.0 or later). The cost of the materials are around 15~35 US dollars, depending on which version you build.
 
+I've made a small batch of the version 2 adapter for sale. Here is the link to the product: https://www.tindie.com/products/26595/
+
 Demo on Youtube:
 
 [![Bluetooth Palm Portable Keyboard demo](http://img.youtube.com/vi/o8ccRMmagCI/0.jpg)](http://www.youtube.com/watch?v=o8ccRMmagCI "Converting a Palm Portable Keyboard into a Bluetooth keyboard!
 ")
 
 [Hackaday blog post](https://hackaday.com/2022/02/08/palm-portable-keyboard-goes-wireless/) about this project.
-
-I've made a small batch of the version 2 adapter for sale. Here is the link to the product: https://www.tindie.com/products/26595/
 
 This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. 
 
@@ -21,8 +21,7 @@ I've made two versions of the adapter: version 1 is based on an Adafruit Feather
 | $25 for the main board | $5 for the main board |
 | Micro-USB charge port | Type-C charge port |
 | Only charges when connected to the keyboard | Charges independently |
-| more power efficient | less power efficient |
-| smaller battery | larger battery |
+| more power efficient | less power efficient, so needs a larger battery to achieve similar run time to ver. 1|
 | more components, harder to solder | less components, easier to solder |
 | has a button to forget the pairing | no button, has to forget the pairing on the host side |
 | no need to sleep | sleeps after idling for 30 minutes to save power, press any key to wake up |

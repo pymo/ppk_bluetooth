@@ -9,6 +9,7 @@ Bill of Materials
 - One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/i/32918743539.html), you can use any other switch, but you need to modify the enclosure)
 - 3D printed enclosure (stl models are in the 3d_print/ folder).
 - 2 screws with the length around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
+- Double-sided tape, and super glue.
 
 Schematic
 ----------
@@ -25,7 +26,7 @@ Some notes about the schematic:
 
 3D printed parts
 ----------------
-See the stl files in 3d_print/ folder. It comes in 4 parts: the upper cap, the middle frame, a battery spacer and two board clips. The board clips need to be super-glued to the middle frame after the print. The battery spacer is to prevent the battery to be overheated by the ESP32-C3 chip (just a pre-caution, the board only get slightly warm during normal usage).
+See the stl files in 3d_print/ folder. It comes in 4 parts: the upper cap, the middle frame, a battery spacer and two board clips. The board clips need to be super-glued to the middle frame during the assembly. The battery spacer is to prevent the battery to be overheated by the ESP32-C3 chip (just a pre-caution, the board only get slightly warm during normal usage).
 
 ![Printed parts before assembly](/images/version2/3d_print.jpg "Printed parts before assembly")
 
@@ -38,15 +39,15 @@ Desolder the 4-pin connector and the power switch.
 
 ![wiring pic](/images/version2/wiring1.jpg)
 
-Cut the single core wire into five (for Palm III or V) or three (for Handspring Visor) 4cm sections, leave 8mm of the insulation.
-
-Palm III or V: solder the wires to pin [4] [5] [6] [7] [10].
-
-Handspring: solder the wires to pin [4] [6] [10].
+Solder two 5 cm lenth thin wires to the pad where the switch was, and the other ends of wires to the travel limit switch.
 
 ![wiring pic](/images/version2/wiring2.jpg)
 
-Solder two wires to the pad where the switch was, and the other ends of wires to the travel limit switch we provided.
+Cut the single core wire into five (for Palm III or V) or three (for Handspring Visor) 3.5 cm sections, leave 8mm of the insulation on them.
+
+- Palm III or V: solder the wires to pin [4] [5] [6] [7] [10].
+
+- Handspring: solder the wires to pin [4] [6] [10].
 
 Solder the positive of the Li-Po battery to pad [+], the negative to the [GND] pad.
 
@@ -82,13 +83,13 @@ You need to install the library [NimBLE-Arduino](https://github.com/h2zero/NimBL
 
 If you are compiling for Handspring Visor keyboard, uncomment the line `#define HANDSPRING` in the file `version2_esp32c3.ino`. If you are compiling for Palm III or V, keep it commented out.
 
-Avoid using a USB hub for programming the board, because it may not provide enough current. Use a USB port that is directly on the PC instead.
-
 Once you know how to program the ESP32-C3 board, open up `version2_esp32c3.ino`, plug in the USB type-C cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
+
+Avoid using a USB hub for programming the board, because it may not provide enough current. Use a USB port that is directly on the PC instead.
 
 Features and quirks
 ---------------------
-- The red LED blinks when the battery is below 20%. It double-blinks when the battery is below 10%, and triple-blinks when the battery is below 5%.
+- The red LED blinks when the battery is below 20%. It double-blinks when the battery is below 15%, and triple-blinks when the battery is below 10%.
 - It can only connect to one device at a time. It automatically connects to the last device it is paired to (if that device is in range). If you want to connect it to another device, you must manually disconnect it in the last connected device's operating system.
-- The ADC on this board is not very accurate, change the `adc_correction ratio` in the code if needed.
+- The board will discharge the battery to a very low state, so please charge the battery as soon as you see the red LED blinks. Otherwise the battery could turn bad quickly.
 
