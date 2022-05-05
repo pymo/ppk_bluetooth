@@ -28,6 +28,8 @@ Some notes about the schematic:
 ----------------
 See the stl files in 3d_print/ folder. It comes in 4 parts: the upper cap, the middle frame, a battery spacer and two board clips. The board clips need to be super-glued to the middle frame during the assembly. The battery spacer is to prevent the battery to be overheated by the ESP32-C3 chip (just a pre-caution, the board only get slightly warm during normal usage).
 
+I used [Tinkercad](https://www.tinkercad.com/) to create these models. If you are interested in modifying the 3D models, you can visit this link: https://www.tinkercad.com/things/iDDUoFQ8ppK
+
 ![Printed parts before assembly](/images/version2/3d_print.jpg "Printed parts before assembly")
 
 Assembly and wiring
@@ -60,6 +62,10 @@ Put some glue and install the switch inside the middle frame, glue it in-place.
 ![Glue the switch](/images/version2/glue_switch.jpg)
 
 Insert the wires into the holes of the middle frame, make sure you are inserting them into the correct hole by cross-check with the schematic.
+
+- Palm III or V: from left to right, pin [4] [5] [6] [7] [10] goes to hole 2, 3, 4, 7, 10
+
+- Handspring: from left to right, pin [4] [6] [10] goes to hole 1, 5, 8
 
 ![wiring pic](/images/version2/wiring6.jpg)
 
