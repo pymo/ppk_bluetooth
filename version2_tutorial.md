@@ -93,9 +93,20 @@ Once you know how to program the ESP32-C3 board, open up `version2_esp32c3.ino`,
 
 Avoid using a USB hub for programming the board, because it may not provide enough current. Use a USB port that is directly on the PC instead.
 
+LED Functionality
+---------------------
+- Green + Red LED constant on: The adapter is handshaking with the keyboard. If it is stuck at this state for more than 3 seconds, it means the adapter is not contacting properly with the keyboard, please re-seat the adapter.
+- Green LED fast flashing: Bluetooth pairing mode.
+- Green LED slow flashing: Paired to the host device, normal usage.
+- Blue LED on: charging.
+- Blue LED off: charge complete.
+- Red LED one flash: battery is below 20%.
+- Red LED dual flash: battery is below 15%.
+- Red LED triple flash: battery is below 10%.
+- (Please recharge as soon as Red LED starts flashing, to maintain the healthiness of the battery.)
+
 Features and quirks
 ---------------------
-- The red LED blinks when the battery is below 20%. It double-blinks when the battery is below 15%, and triple-blinks when the battery is below 10%.
 - It can only connect to one device at a time. It automatically connects to the last device it is paired to (if that device is in range). If you want to connect it to another device, you must manually disconnect it in the last connected device's operating system.
 - The board will discharge the battery to a very low state, so please charge the battery as soon as you see the red LED blinks. Otherwise the battery could turn bad quickly.
 

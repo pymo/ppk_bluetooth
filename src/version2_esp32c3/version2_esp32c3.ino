@@ -1,4 +1,4 @@
- /**
+/**
    This code converts the Palm Portable Keyboard's output into bluetooth.
    See https://github.com/pymo/ppk_bluetooth for details.
 
@@ -16,6 +16,11 @@
 // Define to compile firmware for Handspring keyboard
 // Comment out to compile firmware for Palm III or V keyboard
 // #define HANDSPRING
+
+// Uncomment to put the firmware in battery test mode. It prints
+// the raw battery reading to the bluetooth host. It also disables the
+// sleep function.
+// #define BATTERY_TEST_MODE
 
 #ifdef HANDSPRING
 // Handspring pinout
@@ -446,11 +451,11 @@ void CheckBatteryWithInterval() {
     return;
 
   int raw_bat_data = analogRead(BATTERY_ADC_PIN);
-/*
+#ifdef BATTERY_TEST_MODE
   char volt_str[50];
   sprintf(volt_str, "%d ", raw_bat_data);
   PrintStringToKeyboard(volt_str);
-*/
+#endif
   int battery_level = -1;  // percentage of the battery
   int n;
   for (n = 0; n <= 20; n++) {
@@ -600,6 +605,7 @@ void loop() {
   bool keyboard_rebooted_in_this_cycle;
   keyboard_rebooted_in_this_cycle = false;
 
+#ifndef BATTERY_TEST_MODE
   if ((millis() - last_comm) > IDLE_TIMEOUT) {
     esp_sleep_wakeup_cause_t wakeup_reason = SleepAndWaitForWakeUp();
     switch (wakeup_reason) {
@@ -631,6 +637,7 @@ void loop() {
         break;
     }
   }
+#endif
 
   // reboot if no recent keypress, otherwise keyboard falls asleep
   if (!keyboard_rebooted_in_this_cycle &&
