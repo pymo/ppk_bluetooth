@@ -69,13 +69,13 @@ Insert the wires into the holes of the middle frame, make sure you are inserting
 
 ![wiring pic](/images/version2/wiring6.jpg)
 
-Trim and bend the wire, and fold them inside. This is what contacts the keyboard connector.
-
-![wiring pic](/images/version2/wiring7.jpg)
-
 Glue the two board clips to the middle frame, the board clips hold the board like this:
 
 ![wiring pic](/images/version2/middle_assembly.jpg)
+
+Trim and bend the wire, and fold them inside. This is what contacts the keyboard connector.
+
+![wiring pic](/images/version2/wiring7.jpg)
 
 Put the cap over the middle frame. Make sure it is the correct orientation (the USB type-C port should align with the opening on the cap).
 
