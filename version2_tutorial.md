@@ -3,8 +3,8 @@
 Bill of Materials
 ----------
 - [LilyGo-T-OI-PLUS ESP32-C3](https://www.aliexpress.com/item/1005003348936965.html) board ($5.23+shipping)
-- About 26 AWG solid core wire (wires that used for breadboard are ideal, they have a tinned layer to prevent oxidize)
-- Some thin, flexible wire for switch connection.
+- About 22 AWG solid core wire for making the connector.
+- Some thin, flexible wire for switch connection. I use 30 AWG PVDF insulated single core wire.
 - 802040 Li-Po battery 700mAh (40mm x 20mm x 8mm in dimensions). (The enclosure is specifically designed for this battery size. If you want a larger battery, you may need to modify the enclosure.)
 - One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/i/32918743539.html), you can use any other switch, but you need to modify the enclosure)
 - 3D printed enclosure (stl models are in the 3d_print/ folder).
@@ -22,11 +22,11 @@ Some notes about the schematic:
 - cy384 explained the keyboard's pinout and protocol in his [project page](http://www.cy384.com/projects/palm-keyboard.html) very well. And here is the official [Hardware and Electronics Reference](http://www.splorp.com/pdf/stowawayhwref.pdf) for the keyboard.
 - Red dots are where the wires need to be soldered to the pad.
 - We directly use GPIO as the "VCC" and "GND" of the keyboard, this way we can easily reboot the keyboard. The keyboard uses less than 2.5mA, so it's OK.
-- I used a travel limit switch, because I can embed it inside the socket which connects to the keyboard, so that it will be on automatically when the adapter is plugged in.
+- I used a travel limit switch, and embeded it inside the socket which connects to the keyboard, so that it will be automatically on when the adapter is plugged in.
 
 3D printed parts
 ----------------
-See the stl files in 3d_print/ folder. It comes in 4 parts: the upper cap, the middle frame, a battery spacer and two board clips. The board clips need to be super-glued to the middle frame during the assembly. The battery spacer is to prevent the battery to be overheated by the ESP32-C3 chip (just a pre-caution, the board only get slightly warm during normal usage).
+See the stl files in 3d_print/ folder. It comes in 4 files: the upper cap, the middle frame, a battery spacer and two board clips. The board clips need to be super-glued to the middle frame during the assembly. The battery spacer is to prevent the battery to be overheated by the ESP32-C3 chip (just a pre-caution, the board only get slightly warm during normal usage).
 
 I used [Tinkercad](https://www.tinkercad.com/) to create these models. If you are interested in modifying the 3D models, you can visit this link: https://www.tinkercad.com/things/iDDUoFQ8ppK
 

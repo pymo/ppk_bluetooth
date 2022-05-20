@@ -3,8 +3,9 @@
 Bill of Materials
 ----------
 - [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) board ($24.95+shipping)
-- About 26 AWG solid core wire (wires that used for breadboard are ideal, they have a tinned layer to prevent oxidize)
-- Some thin, flexible wire for battery and RX connection.
+- About 22 AWG solid core wire for making the connector.
+ngle core wire.
+- Some thin, flexible wire for battery and RX connection. I use 30 AWG PVDF insulated single core wire.
 - 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions). (The enclosure is specifically designed for this battery size. If you want a larger battery, you may need to modify the enclosure.)
 - Three 10K ohm resistors (two SMD 0805 size, one axial)
 - One NPN transistor in SMD package (I use 2N3904)
@@ -15,7 +16,7 @@ Bill of Materials
 
 Schematic
 ----------
-This solution uses the hardware serial port instead of software serial, so it's more power efficient (MCU can sleep more without constantly bit-banging the GPIO to emulate software serial). But the PPK speaks RS-232 instead of TTL, this means we need to solder some extra components onto the board to make a voltage level inverter.
+The PPK speaks RS-232 instead of TTL, this means we need to solder some extra components onto the board to make a voltage level inverter.
 
 ![Schematic](/images/version1/schematic.jpg "Schematic")
 
