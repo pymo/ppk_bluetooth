@@ -9,11 +9,9 @@ Demo on Youtube:
 [![Bluetooth Palm Portable Keyboard demo](http://img.youtube.com/vi/o8ccRMmagCI/0.jpg)](http://www.youtube.com/watch?v=o8ccRMmagCI "Converting a Palm Portable Keyboard into a Bluetooth keyboard!
 ")
 
-[Hackaday blog post](https://hackaday.com/2022/02/08/palm-portable-keyboard-goes-wireless/) about this project.
-
 This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. 
 
-I've made two versions of the adapter: version 1 is based on an Adafruit Feather nRF52840 Express board, version 2 is based on a LilyGo-T-OI-PLUS ESP32-C3 board. Here are the differences of these two versions, you can choose which one to build.
+I've made two versions of the adapter: version 1 is based on an Adafruit Feather nRF52840 Express board, version 2 is based on a LilyGo-T-OI-PLUS ESP32-C3 board. Here are the differences of these two versions, you can choose which one to build. I personally recommend version 2, because it is easier to build and more convenient to charge.
 
 |  version 1  |               version 2                |
 | :-------: | :-----------------------------------------------------------------: |
@@ -21,12 +19,20 @@ I've made two versions of the adapter: version 1 is based on an Adafruit Feather
 | $25 for the main board | $5 for the main board |
 | Micro-USB charge port | Type-C charge port |
 | Only charges when connected to the keyboard | Charges independently |
-| more power efficient | less power efficient, so needs a larger battery to achieve similar run time to ver. 1|
+| more power efficient | less power efficient, so needs a larger battery to achieve similar run time to version 1|
 | more components, harder to solder | less components, easier to solder |
 | has a button to forget the pairing | no button, has to forget the pairing on the host side |
 | no need to sleep | sleeps after idling for 30 minutes to save power, press any key to wake up |
+| Supports Palm III and Palm V keyboards | Supports Palm III, Palm V and Handspring Visor keyboards |
 
-Both versions work with the Palm III keyboard (black plastic, p/n P10713U) and the Palm V keyboard (dark grey metal, p/n 3C10439). Version 2 also works with Handspring Visor (Targus PA800 or PA800U). Other variants of this keyboard (connectors for Palm M500, HP Jornada, Compaq iPaq PocketPC, or IrDA version etc.) are not supported.
+- Supported keyboard types
+  - Palm III keyboard (black plastic, p/n P10713U or 3C10317)
+  - Palm V keyboard (dark grey metal, p/n 3C10439)
+  - Handspring Visor (Targus PA800 or PA800U, version 2 only)
+- May be supported in the future
+  - Palm M500 keyboard (dark grey metal, p/n P10802U)
+- Unsupported keyboard types
+  - connectors for HP Jornada, Compaq iPaq PocketPC, other PDA/phones, IrDA version.
 
 Tutorials to build the adapter
 -----------
@@ -49,6 +55,13 @@ Special Key mapping
 - Done is mapped to Insert.
 
 Adding to or modifying the mapping is straightforward, just edit the `config_keymap` and `config_fnkeymap` functions.
+
+Coverage
+-----------
+Here are some blog posts covering this project:
+- [Palm Portable Keyboard Goes Wireless](https://hackaday.com/2022/02/08/palm-portable-keyboard-goes-wireless/) on Hackaday.
+- [Upcycling a Palm Portable Keyboard Into a Bluetooth-Enabled Accessory](https://www.hackster.io/news/upcycling-a-palm-portable-keyboard-into-a-bluetooth-enabled-accessory-9ac6c659c1f3) on hackster.io.
+- [A Palm Portable Keyboard Bluetooth Adapter](https://www.hackster.io/news/upcycling-a-palm-portable-keyboard-into-a-bluetooth-enabled-accessory-9ac6c659c1f3) on Adafruit blog.
 
 ![Bluetooth Palm Portable Keyboard's stand supporting an iPhone](/images/ppk_demo_iphone.jpg "Bluetooth Palm Portable Keyboard working with a phone")
 

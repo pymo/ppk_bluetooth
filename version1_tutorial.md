@@ -4,8 +4,7 @@ Bill of Materials
 ----------
 - [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) board ($24.95+shipping)
 - About 22 AWG solid core wire for making the connector.
-ngle core wire.
-- Some thin, flexible wire for battery and RX connection. I use 30 AWG PVDF insulated single core wire.
+- Some thin, flexible wire for battery and RX connection. I use 30 AWG PVDF insulated solid core wire.
 - 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions). (The enclosure is specifically designed for this battery size. If you want a larger battery, you may need to modify the enclosure.)
 - Three 10K ohm resistors (two SMD 0805 size, one axial)
 - One NPN transistor in SMD package (I use 2N3904)

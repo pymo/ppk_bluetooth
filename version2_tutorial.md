@@ -20,7 +20,6 @@ ESP32-C3's hardware serial port has built-in invertion function, and its GPIO ha
 Some notes about the schematic:
 
 - cy384 explained the keyboard's pinout and protocol in his [project page](http://www.cy384.com/projects/palm-keyboard.html) very well. And here is the official [Hardware and Electronics Reference](http://www.splorp.com/pdf/stowawayhwref.pdf) for the keyboard.
-- Red dots are where the wires need to be soldered to the pad.
 - We directly use GPIO as the "VCC" and "GND" of the keyboard, this way we can easily reboot the keyboard. The keyboard uses less than 2.5mA, so it's OK.
 - I used a travel limit switch, and embeded it inside the socket which connects to the keyboard, so that it will be automatically on when the adapter is plugged in.
 
