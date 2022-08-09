@@ -8,7 +8,7 @@ Bill of Materials
 - 502030 Li-Po battery 250mAh (30mm x 20mm x 5mm in dimensions). (The enclosure is specifically designed for this battery size. If you want a larger battery, you may need to modify the enclosure.)
 - Three 10K ohm resistors (two SMD 0805 size, one axial)
 - One NPN transistor in SMD package (I use 2N3904)
-- One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/i/32918743539.html), you can use any other switch, but you need to modify the enclosure)
+- One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804245842522.html), you can use any other switch, but you need to modify the enclosure)
 - 3D printed enclosure (stl models are in the 3d_print/ folder).
 - 4 screws with the length around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
 - super glue.

@@ -39,7 +39,7 @@ Tutorials to build the adapter
 
 [How to build the version 1 adapter](version1_tutorial.md)
 
-[How to build the version 2 adapter](version2_tutorial.md)
+[How to build the version 2 adapter](version2_tutorial.md)  [Manual of the version 2 adapter](docs/ppk_bluetooth_manual.pdf)
 
 
 Special Key mapping

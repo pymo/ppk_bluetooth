@@ -6,7 +6,7 @@ Bill of Materials
 - About 22 AWG solid core wire for making the connector.
 - Some thin, flexible wire for switch connection. I use 30 AWG PVDF insulated single core wire.
 - 802040 Li-Po battery 700mAh (40mm x 20mm x 8mm in dimensions). (The enclosure is specifically designed for this battery size. If you want a larger battery, you may need to modify the enclosure.)
-- One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/i/32918743539.html), you can use any other switch, but you need to modify the enclosure)
+- One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804245842522.html), you can use any other switch, but you need to modify the enclosure)
 - 3D printed enclosure (stl models are in the 3d_print/ folder).
 - 2 screws with the length around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
 - Double-sided tape, and super glue.
@@ -80,7 +80,7 @@ Put the cap over the middle frame. Make sure it is the correct orientation (the 
 
 Screw the 2 screws, and you are done!
 
-![wiring pic](/images/version2/upper_case.jpg)
+![wiring pic](/images/version2/bottom.jpg)
 
 Programming
 -----------
