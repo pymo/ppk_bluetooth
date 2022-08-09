@@ -44,7 +44,7 @@ Solder two 5 cm lenth thin wires to the pad where the switch was, and the other 
 
 ![wiring pic](/images/version2/wiring2.jpg)
 
-Cut the single core wire into five (for Palm III or V) or three (for Handspring Visor) 3.5 cm sections, leave 8mm of the insulation on them.
+Cut the single core wire into five (for Palm III or V) or three (for Handspring Visor) 3 cm sections, leave 6mm of the insulation on them.
 
 - Palm III or V: solder the wires to pin [4] [5] [6] [7] [10].
 
