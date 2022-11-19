@@ -1,3 +1,8 @@
+// This is a library copied from https://github.com/T-vK/ESP32-BLE-Keyboard
+// I have made several modifications to the library, so I decided to
+// directly include the .h/.cpp files in the project instead of asking
+// the users to install that library.
+
 // uncomment the following line to use NimBLE library
 #define USE_NIMBLE
 

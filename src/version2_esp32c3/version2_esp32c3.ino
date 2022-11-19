@@ -9,12 +9,12 @@
 
 #include "BleKeyboard.h"
 
-// Define to enable debug output through the arduino console at 115200
+// Uncomment to enable debug output through the arduino console at speed 115200n1;
 // Comment out to disable debug output.
 // #define PPK_DEBUG
 
-// Define to compile firmware for Handspring keyboard
-// Comment out to compile firmware for Palm III or V keyboard
+// Uncomment to compile firmware for Handspring keyboard;
+// Comment out to compile firmware for Palm III or V keyboard.
 // #define HANDSPRING
 
 // Uncomment to put the firmware in battery test mode. It prints
@@ -52,7 +52,8 @@
 #endif
 
 #define BATTERY_ADC_PIN 2
-#define BATTERY_LED 9
+#define BATTERY_LED 8
+#define BATTERY_LED_PIN_NUM GPIO_NUM_8
 #define FUNC_LED 3
 
 void ledOff(uint8_t pin) {
@@ -70,8 +71,8 @@ void ledOn(uint8_t pin) {
 // if the keyboard has been idled for 30 min, enter light sleep.
 #define IDLE_TIMEOUT 1800000
 
-// if the keyboard can not initialize after 3 seconds, reboot the board.
-#define KEYBOARD_INIT_TIMEOUT 3000
+// if the keyboard can not initialize after 4 seconds, reboot the board.
+#define KEYBOARD_INIT_TIMEOUT 4000
 
 // Conversion factor for micro seconds to mili seconds
 #define uS_TO_mS_FACTOR 1000
@@ -247,8 +248,16 @@ void boot_keyboard() {
   delay(100);
   digitalWrite(VCC_PIN, HIGH);
 
+  int start_time = millis();
 #ifndef HANDSPRING
   while (digitalRead(DCD_PIN) != HIGH) {
+    if (millis() - start_time > KEYBOARD_INIT_TIMEOUT) {
+#ifdef PPK_DEBUG
+      Serial.print(
+          "Keyboard not pulling up DCD, bad keyboard? Rebooting...");
+#endif
+      ESP.restart();
+    }
     delay(1);
   };
 
@@ -277,7 +286,6 @@ void boot_keyboard() {
   // timing of plugging in the adapter, there could be garbage chars before the
   // ID, the following code will ignore them.
   int byte1, byte2 = 0;
-  int start_time = millis();
   while (true) {
     delay(10);
     if (Serial1.available()) {
@@ -425,12 +433,6 @@ void HandleKeyEvent(uint8_t key_byte) {
 #define BAT_CHECK_INTERVAL 60000  // 60 seconds
 unsigned long last_battery_check_time = 0;
 
-/*
-float batVolt_lookup[] =
- {3, 3.35, 3.45, 3.49, 3.53, 3.57, 3.58, 3.59, 3.61, 3.63, 3.65, 3.68, 3.73,
-  3.78, 3.82, 3.87, 3.91, 3.96, 4.02, 4.09, 4.17};
- */
-
 // The ADC of ESP32-C3 is not linear to the voltage... so we don't bother
 // converting the raw value to volts. We just measure the raw value across the
 // entire run time, then we can calculate the raw reading at 0%, 5%, ..., 100%
@@ -577,6 +579,7 @@ esp_sleep_wakeup_cause_t SleepAndWaitForWakeUp() {
 #ifndef HANDSPRING
   gpio_hold_en(RTS_PIN_NUM);
 #endif
+  gpio_hold_en(BATTERY_LED_PIN_NUM);
   gpio_wakeup_enable(RX_PIN_NUM,
                      INVERT_TTL ? GPIO_INTR_HIGH_LEVEL : GPIO_INTR_LOW_LEVEL);
   esp_sleep_enable_gpio_wakeup();
@@ -592,6 +595,7 @@ esp_sleep_wakeup_cause_t SleepAndWaitForWakeUp() {
 #ifndef HANDSPRING
   gpio_hold_dis(RTS_PIN_NUM);
 #endif
+  gpio_hold_dis(BATTERY_LED_PIN_NUM);
   return esp_sleep_get_wakeup_cause();
 }
 

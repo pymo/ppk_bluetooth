@@ -44,7 +44,7 @@ Solder two 5 cm lenth thin wires to the pad where the switch was, and the other 
 
 ![wiring pic](/images/version2/wiring2.jpg)
 
-Cut the single core wire into five (for Palm III or V) or three (for Handspring Visor) 3 cm sections, leave 6mm of the insulation on them.
+Cut the single core wire into five (for Palm III or V) or three (for Handspring Visor) 3.2 cm sections, leave 6mm of the insulation on them.
 
 - Palm III or V: solder the wires to pin [4] [5] [6] [7] [10].
 
@@ -72,7 +72,7 @@ Glue the two board clips to the middle frame, the board clips hold the board lik
 
 ![wiring pic](/images/version2/middle_assembly.jpg)
 
-Trim and bend the wire, and fold them inside. This is what contacts the keyboard connector.
+Trim the wires to suitable length, then bend the wires and fold them inside. This is what contacts the keyboard connector.
 
 ![wiring pic](/images/version2/wiring7.jpg)
 
@@ -84,17 +84,21 @@ Screw the 2 screws, and you are done!
 
 Programming
 -----------
-You need to install the library [NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino), refer to the "Installation" section in its README.
+I find [this tutorial](https://www.electronics-lab.com/getting-started-with-espressifs-esp32-c3-devkitm-1-on-arduino-ide/) very good for teaching how to use the Arduino IDE to program the ESP32-C3 board. Other than the steps in the tutorial, you also need to install the library [NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino), refer to the "Installation" section in NimBLE-Arduino's README.
+
+Once you know how to program the board, open up `version2_esp32c3.ino`, plug in the board to the PC using the USB type-C cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
 
 If you are compiling for Handspring Visor keyboard, uncomment the line `#define HANDSPRING` in the file `version2_esp32c3.ino`. If you are compiling for Palm III or V, keep it commented out.
 
-Once you know how to program the ESP32-C3 board, open up `version2_esp32c3.ino`, plug in the USB type-C cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
+Notes:
 
-Avoid using a USB hub for programming the board, because it may not provide enough current. Use a USB port that is directly on the PC instead.
+- The micro switch needs to be at the "on" position for the board to accept programming, this means you need to plug in the adapter to the keyboard before trying to program.
+- Avoid using a USB hub for programming the board, because it may not provide enough current. Use a USB port that is directly on the PC instead.
+- I've heard complaints about this LILYGO T-OI-PLUS's USB-RS232 chip driver is not very good in Mac OS. So using Windows is preferred.
 
 LED Functionality
 ---------------------
-- Green + Red LED constant on: The adapter is handshaking with the keyboard. If it is stuck at this state for more than 3 seconds, it means the adapter is not contacting properly with the keyboard, please re-seat the adapter.
+- Green + Red LED constant on: The adapter is handshaking with the keyboard. If it is stuck at this state for more than 3 seconds, it means the adapter is not contacting properly with the keyboard, please re-seat the adapter. It may also mean the keyboard is broken and not responding to the handshake.
 - Green LED fast flashing: Bluetooth pairing mode.
 - Green LED slow flashing: Paired to the host device, normal usage.
 - Blue LED on: charging.
