@@ -113,7 +113,7 @@ Features and quirks
 Possible improvements
 ---------------------
 
-On some devices (my Thinkpad laptop with Debian, and Oneplus 5T, for example), the host receives key reports very slowly (almost as low as 10 reports per second). I have added a coalescing method in the software to alleviate it. But the reason of the slowness is still unkown. If you know why the slowness happens, please let me know by opening an issue.
+On some devices (my Thinkpad laptop with Debian, and Oneplus 5T, for example), the host receives key reports very slowly (almost as low as 10 reports per second). I have added a coalescing method in the software to alleviate it. But the reason of the slowness is still unknown. If you know why the slowness happens, please let me know by opening an issue.
 
 It's possible to support USB HID, so it can be used with both USB and Bluetooth, and even switch on-the-fly by hot-keys.
 

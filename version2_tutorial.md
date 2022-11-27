@@ -36,7 +36,7 @@ Assembly and wiring
 
 Desolder the 4-pin connector and the power switch.
 
-(optional) Desolder the resistor next to the red LED, solder a 2K ohm resistor between the [9] pad and the positive pin of the red LED. This would re-purpose the red LED to be used by the GPIO9, instead of always on.
+(optional) Desolder the resistor next to the red LED, solder a 2K ohm resistor between the [8] pad and the positive pin of the red LED. This would re-purpose the red LED to be used by the GPIO8, instead of always on.
 
 ![wiring pic](/images/version2/wiring1.jpg)
 
@@ -86,7 +86,7 @@ Programming
 -----------
 I find [this tutorial](https://www.electronics-lab.com/getting-started-with-espressifs-esp32-c3-devkitm-1-on-arduino-ide/) very good for teaching how to use the Arduino IDE to program the ESP32-C3 board. Other than the steps in the tutorial, you also need to install the library [NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino), refer to the "Installation" section in NimBLE-Arduino's README.
 
-Once you know how to program the board, open up `version2_esp32c3.ino`, plug in the board to the PC using the USB type-C cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
+Once you know how to program the board, open up `version2_esp32c3.ino`, plug in the board to the PC using a USB type-C cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
 
 If you are compiling for Handspring Visor keyboard, uncomment the line `#define HANDSPRING` in the file `version2_esp32c3.ino`. If you are compiling for Palm III or V, keep it commented out.
 
@@ -94,7 +94,7 @@ Notes:
 
 - The micro switch needs to be at the "on" position for the board to accept programming, this means you need to plug in the adapter to the keyboard before trying to program.
 - Avoid using a USB hub for programming the board, because it may not provide enough current. Use a USB port that is directly on the PC instead.
-- I've heard complaints about this LILYGO T-OI-PLUS's USB-RS232 chip driver is not very good in Mac OS. So using Windows is preferred.
+- I've heard complaints about this LILYGO T-OI-PLUS's USB-RS232 chip driver is not very stable under macOS. So Windows is preferred.
 
 LED Functionality
 ---------------------
