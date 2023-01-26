@@ -3,10 +3,10 @@
 Bill of Materials
 ----------
 - [LilyGo-T-OI-PLUS ESP32-C3](https://www.aliexpress.com/item/1005003348936965.html) board ($5.23+shipping)
-- About 22 AWG solid core wire for making the connector.
+- 22 AWG single core wire for making the connector.
 - Some thin, flexible wire for switch connection. I use 30 AWG PVDF insulated single core wire.
-- 802040 Li-Po battery 700mAh (40mm x 20mm x 8mm in dimensions). (The enclosure is specifically designed for this battery size. If you want a larger battery, you may need to modify the enclosure.)
-- One switch (I use a tiny travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804245842522.html), you can use any other switch, but you need to modify the enclosure)
+- 802040 Li-Po battery 700mAh (40mm x 20mm x 8mm in dimensions).
+- One travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804245842522.html). Please try to use this exact model, because the enclosure is specifically designed around it.
 - 3D printed enclosure (stl models are in the 3d_print/ folder).
 - 2 screws with the length around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
 - Double-sided tape, and super glue.
@@ -98,7 +98,11 @@ Notes:
 
 LED Functionality
 ---------------------
-- Green + Red LED constant on: The adapter is handshaking with the keyboard. If it is stuck at this state for more than 3 seconds, it means the adapter is not contacting properly with the keyboard, please re-seat the adapter. It may also mean the keyboard is broken and not responding to the handshake.
+- Green + Red LED constant on: The adapter is handshaking with the keyboard.
+  - If it is stuck at this state for more than 3 seconds, it means the adapter is not communicating correctly with the keyboard. Please consider the following possibilities:
+    - The adapter is not seated properly, please re-seat the adapter, or check the contacts visually.
+    - The keyboard may be broken and not responding to the handshake.
+    - The adapter may be low on battery, try to charge it for a while.
 - Green LED fast flashing: Bluetooth pairing mode.
 - Green LED slow flashing: Paired to the host device, normal usage.
 - Blue LED on: charging.
@@ -106,10 +110,10 @@ LED Functionality
 - Red LED one flash: battery is below 20%.
 - Red LED dual flash: battery is below 15%.
 - Red LED triple flash: battery is below 10%.
-- (Please recharge as soon as Red LED starts flashing, to maintain the healthiness of the battery.)
+  - Please recharge as soon as Red LED starts flashing (<20%), to maintain the healthiness of the battery.
 
 Features and quirks
 ---------------------
 - It can only connect to one device at a time. It automatically connects to the last device it is paired to (if that device is in range). If you want to connect it to another device, you must manually disconnect it in the last connected device's operating system.
-- The board will discharge the battery to a very low state, so please charge the battery as soon as you see the red LED blinks. Otherwise the battery could turn bad quickly.
+- The board will discharge the battery to a very low state, so please charge the battery as soon as you see the red LED blinks. Otherwise the battery longevity may be affected.
 
