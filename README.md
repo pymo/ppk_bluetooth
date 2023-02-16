@@ -19,7 +19,7 @@ I've made two versions of the adapter: version 1 is based on an Adafruit Feather
 | $25 for the main board | $5 for the main board |
 | Micro-USB charge port | Type-C charge port |
 | Only charges when connected to the keyboard | Charges independently |
-| more power efficient | less power efficient, so needs a larger battery to achieve similar run time to version 1|
+| more power efficient | less power efficient, so needs a larger battery to achieve similar battery life to version 1|
 | more components, harder to solder | less components, easier to solder |
 | has a button to forget the pairing | no button, has to forget the pairing on the host side |
 | no need to sleep | sleeps after idling for 30 minutes to save power, press any key to wake up |
@@ -28,10 +28,10 @@ I've made two versions of the adapter: version 1 is based on an Adafruit Feather
 - Supported keyboard types
   - Palm III keyboard (black plastic, p/n P10713U or 3C10317)
   - Palm V keyboard (dark grey metal, p/n 3C10439)
-  - Handspring Visor (Targus PA800 or PA800U, version 2 only)
-- May be supported in the future
-  - Palm M500 keyboard (dark grey metal, p/n P10802U)
+  - Handspring Visor (Targus PA800 or PA800U)
 - Unsupported keyboard types
+  - Palm M500 keyboard (dark grey metal, p/n P10802U)
+    - The connector is too small to mimc using 3d printing. But you can reference [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s project if you are willing to make a PCB for it.
   - connectors for HP Jornada, Compaq iPaq PocketPC, other PDA/phones, IrDA version.
 
 Tutorials to build the adapter
