@@ -2,11 +2,11 @@
 
 Bill of Materials
 ----------
-- [LilyGo-T-OI-PLUS ESP32-C3](https://www.aliexpress.com/item/1005003348936965.html) board ($5.23+shipping)
+- [LilyGo TTGO T-OI PLUS ESP32-C3](https://www.aliexpress.com/item/1005003348936965.html) board ($5.98+shipping)
 - 22 AWG single core wire for making the connector.
 - Some thin, flexible wire for switch connection. I use 30 AWG PVDF insulated single core wire.
 - 802040 Li-Po battery 700mAh (40mm x 20mm x 8mm in dimensions).
-- One travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804245842522.html). Please try to use this exact model, because the enclosure is specifically designed around it.
+- One travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804245842522.html). Please use this exact model, because the enclosure is specifically designed around it.
 - 3D printed enclosure (stl models are in the 3d_print/ folder).
 - 2 screws with the length around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
 - Double-sided tape, and super glue.
