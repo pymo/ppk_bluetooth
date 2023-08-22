@@ -2,7 +2,7 @@
 
 Bill of Materials
 ----------
-- [LilyGo TTGO T-OI PLUS ESP32-C3](https://www.aliexpress.com/item/1005003348936965.html) board ($5.98+shipping)
+- [LilyGo TTGO T-OI PLUS ESP32-C3](https://www.aliexpress.us/item/3256803162622213.html) board (no battery holder version, $5.98+shipping)
 - 22 AWG single core wire for making the connector.
 - Some thin, flexible wire for switch connection. I use 30 AWG PVDF insulated single core wire.
 - 802040 Li-Po battery 700mAh (40mm x 20mm x 8mm in dimensions).
@@ -56,7 +56,7 @@ Use a double-sided tape to glue the battery spacer to the back side of the board
 
 ![wiring pic](/images/version2/wiring3.jpg)
 
-Put some glue and install the switch inside the middle frame, glue it in-place.
+Put some super glue and install the switch inside the middle frame, glue it in-place.
 
 ![Glue the switch](/images/version2/glue_switch.jpg)
 
@@ -110,10 +110,10 @@ LED Functionality
 - Red LED one flash: battery is below 20%.
 - Red LED dual flash: battery is below 15%.
 - Red LED triple flash: battery is below 10%.
-  - Please recharge as soon as Red LED starts flashing (<20%), to maintain the healthiness of the battery.
+  - Please recharge as soon as Red LED starts flashing (<20%), to maintain the longevity of the battery.
 
 Features and quirks
 ---------------------
-- It can only connect to one device at a time. It automatically connects to the last device it is paired to (if that device is in range). If you want to connect it to another device, you must manually disconnect it in the last connected device's operating system.
+- It can only connect to one device at a time. It automatically connects to the last device it is paired to (if that device is in range). If you want to connect it to another device, you can manually disconnect it in the last connected device's operating system.
 - The board will discharge the battery to a very low state, so please charge the battery as soon as you see the red LED blinks. Otherwise the battery longevity may be affected.
 
