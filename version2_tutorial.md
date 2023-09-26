@@ -93,7 +93,7 @@ If you are compiling for Handspring Visor keyboard, uncomment the line `#define 
 Notes:
 
 - The micro switch needs to be at the "on" position for the board to accept programming, this means you need to plug in the adapter to the keyboard before trying to program.
-- Avoid using a USB hub for programming the board, because it may not provide enough current. Use a USB port that is directly on the PC instead.
+- Avoid using a USB hub for programming the board, because it may not provide enough current. Use a USB port that is directly on the PC.
 - I've heard complaints about this LILYGO T-OI-PLUS's USB-RS232 chip driver is not very stable under macOS. So Windows is preferred.
 
 LED Functionality
@@ -103,17 +103,17 @@ LED Functionality
     - The adapter is not seated properly, please re-seat the adapter, or check the contacts visually.
     - The keyboard may be broken and not responding to the handshake.
     - The adapter may be low on battery, try to charge it for a while.
-- Green LED fast flashing: Bluetooth pairing mode.
-- Green LED slow flashing: Paired to the host device, normal usage.
-- Blue LED on: charging.
+- Green LED fast blink: Bluetooth pairing mode.
+- Green LED slow blink: Paired to the host device, normal usage.
+- Blue LED on: charging battery.
 - Blue LED off: charge complete.
-- Red LED one flash: battery is below 20%.
-- Red LED dual flash: battery is below 15%.
-- Red LED triple flash: battery is below 10%.
-  - Please recharge as soon as Red LED starts flashing (<20%), to maintain the longevity of the battery.
+- Red LED one blink: battery is below 20%.
+- Red LED dual blink: battery is below 15%.
+- Red LED triple blink: battery is below 10%.
+  - Please recharge as soon as Red LED starts blinking (<20%), to maintain the battery health.
 
 Features and quirks
 ---------------------
 - It can only connect to one device at a time. It automatically connects to the last device it is paired to (if that device is in range). If you want to connect it to another device, you can manually disconnect it in the last connected device's operating system.
-- The board will discharge the battery to a very low state, so please charge the battery as soon as you see the red LED blinks. Otherwise the battery longevity may be affected.
+- The board will discharge the battery to a very low state, so please charge the battery as soon as you see the red LED blinks. Otherwise the battery health may be affected.
 
