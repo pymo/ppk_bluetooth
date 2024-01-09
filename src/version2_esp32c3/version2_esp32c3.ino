@@ -14,7 +14,7 @@
 // #define PPK_DEBUG
 
 // Uncomment to compile firmware for Handspring keyboard;
-// Comment out to compile firmware for Palm III or V keyboard.
+// Comment out to compile firmware for Palm III, V or M500 keyboard.
 // #define HANDSPRING
 
 // Uncomment to put the firmware in battery test mode. It prints
@@ -22,29 +22,24 @@
 // sleep function.
 // #define BATTERY_TEST_MODE
 
+// #define GERMAN_LAYOUT
+
 #ifdef HANDSPRING
 // Handspring pinout
 #define VCC_PIN 4
-#define VCC_PIN_NUM GPIO_NUM_4
 #define GND_PIN 6
-#define GND_PIN_NUM GPIO_NUM_6
 #define RX_PIN 10
-#define RX_PIN_NUM GPIO_NUM_10
 #define TX_PIN 19
 #define HEX_ID0 0xF9
 #define HEX_ID1 0xFB
 #define INVERT_TTL false
 #else
-// Palm III or V pinout
+// Palm III, V or m500 pinout
 #define VCC_PIN 4
-#define VCC_PIN_NUM GPIO_NUM_4
 #define RTS_PIN 6
-#define RTS_PIN_NUM GPIO_NUM_6
 #define DCD_PIN 7
 #define GND_PIN 10
-#define GND_PIN_NUM GPIO_NUM_10
 #define RX_PIN 5
-#define RX_PIN_NUM GPIO_NUM_5
 #define TX_PIN 19
 #define HEX_ID0 0xFA
 #define HEX_ID1 0xFD
@@ -53,7 +48,6 @@
 
 #define BATTERY_ADC_PIN 2
 #define BATTERY_LED 8
-#define BATTERY_LED_PIN_NUM GPIO_NUM_8
 #define FUNC_LED 3
 
 void ledOff(uint8_t pin) {
@@ -109,7 +103,11 @@ void config_keymap() {
   key_map[0b00001100] = 'r';
   key_map[0b00001101] = 't';
   key_map[0b00001110] = 'y';
+#ifdef GERMAN_LAYOUT
+  key_map[0b00001111] = KEY_OEM_102;  // German <>| key
+#else
   key_map[0b00001111] = '`';
+#endif
 
   // y2 row
   key_map[0b00010000] = 'x';
@@ -159,7 +157,11 @@ void config_keymap() {
   key_map[0b00110100] = '8';
   key_map[0b00110101] = '9';
   key_map[0b00110110] = '0';
+#ifdef GERMAN_LAYOUT
+  key_map[0b00110111] = '`';  // "Space 2"
+#else
   key_map[0b00110111] = ' ';  // "Space 2"
+#endif
 
   // y7 row
   key_map[0b00111000] = '[';
@@ -189,7 +191,11 @@ void config_keymap() {
   key_map[0b01001100] = 'm';
   key_map[0b01001101] = ',';
   key_map[0b01001110] = '.';
+#ifdef GERMAN_LAYOUT
+  key_map[0b01001111] = KEY_RIGHT_ALT;  // "DONE" or "Done"
+#else
   key_map[0b01001111] = KEY_INSERT;  // "DONE" or "Done"
+#endif
 
   // y10 row
   key_map[0b01010000] = KEY_DELETE;
@@ -226,6 +232,9 @@ void config_fnkeymap() {
   fn_key_map[0b00110110] = KEY_F10;  // 0
   fn_key_map[0b00110000] = KEY_F11;  // -
   fn_key_map[0b00110001] = KEY_F12;  // =
+#ifdef GERMAN_LAYOUT
+  fn_key_map[0b01010000] = KEY_INSERT;   // KEY_DELETE
+#endif
 }
 
 void boot_keyboard() {
@@ -320,7 +329,7 @@ void setup() {
   ledOn(FUNC_LED);
   CheckBatteryWithInterval();
   // The adapter may have just been plugged in and is not fully contacting
-  // with the keyboard's golden finger yet. Wait for 1s before doing anything.
+  // with the keyboard's golden fingers yet. Wait for 0.5s before doing anything.
   delay(500);
 
   Serial1.begin(9600, SERIAL_8N1, RX_PIN, TX_PIN, /*invert=*/INVERT_TTL);
@@ -521,7 +530,7 @@ void HandleFuncLedBlink(uint8_t pin) {
         ledOff(pin);
       break;
     case LED_BLINK_ONCE:
-      if (current_time % 6000 < 50)
+      if (current_time % 5000 < 50)
         ledOn(pin);
       else
         ledOff(pin);
@@ -574,13 +583,13 @@ esp_sleep_wakeup_cause_t SleepAndWaitForWakeUp() {
   ledOff(FUNC_LED);
   // Holds the state of VCC, GND and RTS line so the PPK is still alive.
   // Otherwise we won't be able to wake up by key press.
-  gpio_hold_en(VCC_PIN_NUM);
-  gpio_hold_en(GND_PIN_NUM);
+  gpio_hold_en((gpio_num_t)VCC_PIN);
+  gpio_hold_en((gpio_num_t)GND_PIN);
 #ifndef HANDSPRING
-  gpio_hold_en(RTS_PIN_NUM);
+  gpio_hold_en((gpio_num_t)RTS_PIN);
 #endif
-  gpio_hold_en(BATTERY_LED_PIN_NUM);
-  gpio_wakeup_enable(RX_PIN_NUM,
+  gpio_hold_en((gpio_num_t)BATTERY_LED);
+  gpio_wakeup_enable((gpio_num_t)RX_PIN,
                      INVERT_TTL ? GPIO_INTR_HIGH_LEVEL : GPIO_INTR_LOW_LEVEL);
   esp_sleep_enable_gpio_wakeup();
   // We need to wake up periodically to keep the PPK alive.
@@ -590,12 +599,12 @@ esp_sleep_wakeup_cause_t SleepAndWaitForWakeUp() {
   // Sleep starts, execution will continue once RX line is active, or the timer
   // is up.
   esp_light_sleep_start();
-  gpio_hold_dis(VCC_PIN_NUM);
-  gpio_hold_dis(GND_PIN_NUM);
+  gpio_hold_dis((gpio_num_t)VCC_PIN);
+  gpio_hold_dis((gpio_num_t)GND_PIN);
 #ifndef HANDSPRING
-  gpio_hold_dis(RTS_PIN_NUM);
+  gpio_hold_dis((gpio_num_t)RTS_PIN);
 #endif
-  gpio_hold_dis(BATTERY_LED_PIN_NUM);
+  gpio_hold_dis((gpio_num_t)BATTERY_LED);
   return esp_sleep_get_wakeup_cause();
 }
 

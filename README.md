@@ -22,15 +22,14 @@ I've made two versions of the adapter: version 1 is based on an Adafruit Feather
 | more components, harder to solder | less components, easier to solder |
 | has a button to forget the pairing | no button, has to forget the pairing on the host side |
 | no need to sleep | sleeps after idling for 30 minutes to save power, press any key to wake up |
-| Supports Palm III and Palm V keyboards | Supports Palm III, Palm V and Handspring Visor keyboards |
+| Supports Palm III and Palm V keyboards | Supports Palm III, Palm V, Palm M500, and Handspring Visor keyboards |
 
 - Supported keyboard types
-  - Palm III keyboard (black plastic, p/n P10713U or 3C10317)
-  - Palm V keyboard (dark grey metal, p/n 3C10439)
+  - Palm III keyboard (p/n P10713U or 3C10317)
+  - Palm V keyboard (p/n 3C10439)
+  - Palm M500 keyboard (p/n P10802U)
   - Handspring Visor (Targus PA800 or PA800U)
 - Unsupported keyboard types
-  - Palm M500 keyboard (dark grey metal, p/n P10802U)
-    - The connector is too small to mimc using 3d printing. But you can reference [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s project if you are willing to make a PCB for it.
   - connectors for HP Jornada, Compaq iPaq PocketPC, other PDA/phones, IrDA version.
 
 Tutorials to build the adapter

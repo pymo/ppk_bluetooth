@@ -105,6 +105,8 @@ const uint8_t KEY_NUM_PLUS = 0xDF;
 const uint8_t KEY_NUM_ENTER = 0xE0;
 const uint8_t KEY_NUM_PERIOD = 0xEB;
 
+const uint8_t KEY_OEM_102 = 0xEC;
+
 typedef uint8_t MediaKeyReport[2];
 
 const MediaKeyReport KEY_MEDIA_BRIGHTNESS_UP = {1, 0};

@@ -4,9 +4,10 @@ Bill of Materials
 ----------
 - [LilyGo TTGO T-OI PLUS ESP32-C3](https://www.aliexpress.us/item/3256803162622213.html) board (no battery holder version, $5.98+shipping)
 - 22 AWG single core wire for making the connector.
-- Some thin, flexible wire for switch connection. I use 30 AWG PVDF insulated single core wire.
+  - or, a [custom made PCB](https://oshwlab.com/project/publish/6843992533c44e27922a81f5a7f3643d) if you are making for Palm M500 keyboards. You can fabricate it yourself, or buy it from my [Tindie store]().
+- Some thin, flexible wire for the switch connection. I use 30 AWG PVDF insulated single core wire.
 - 802040 Li-Po battery 700mAh (40mm x 20mm x 8mm in dimensions).
-- One travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804245842522.html). Please use this exact model, because the enclosure is specifically designed around it.
+- One travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804072080898.html). Please use this exact model, because the enclosure is specifically designed around it.
 - 3D printed enclosure (stl models are in the 3d_print/ folder).
 - 2 screws with the length around 5mm and the outer diameter around 2mm. You can also use other size if you are willing to modify the enclosure (The thread density does not matter because it self-taps into the hole)
 - Double-sided tape, and super glue.
@@ -44,11 +45,19 @@ Solder two 5 cm lenth thin wires to the pad where the switch was, and the other 
 
 ![wiring pic](/images/version2/wiring2.jpg)
 
-Cut the single core wire into five (for Palm III or V) or three (for Handspring Visor) 3.2 cm sections, leave 6mm of the insulation on them.
+If you are making adapters for Palm III or V, or Handspring Visor:
 
-- Palm III or V: solder the wires to pin [4] [5] [6] [7] [10].
+- Cut the single core wire into five (for Palm III or V) or three (for Handspring Visor) 3.2 cm sections, leave 6mm of the insulation on them.
 
-- Handspring: solder the wires to pin [4] [6] [10].
+  - Palm III or V: solder the wires to pin [4] [5] [6] [7] [10].
+
+  - Handspring Visor: solder the wires to pin [4] [6] [10].
+
+If you are making adapters for Palm M500:
+
+- Cut 5 segments of thin wires, solder them to the custom PCB, then solder the wires to pin [4] [5] [6] [7] [10]
+
+![wiring for Palm M500 keyboards](/images/version2/wiring5.jpg)
 
 Solder the positive of the Li-Po battery to pad [+], the negative to the [GND] pad.
 
@@ -65,6 +74,8 @@ Insert the wires into the holes of the middle frame, make sure you are inserting
 - Palm III or V: from left to right, pin [4] [5] [6] [7] [10] goes to hole 2, 3, 4, 7, 10
 
 - Handspring: from left to right, pin [4] [6] [10] goes to hole 1, 5, 8
+
+- Palm M500: insert the PCB into the middle frame.
 
 ![wiring pic](/images/version2/wiring6.jpg)
 
@@ -88,7 +99,7 @@ I find [this tutorial](https://www.electronics-lab.com/getting-started-with-espr
 
 Once you know how to program the board, open up `version2_esp32c3.ino`, plug in the board to the PC using a USB type-C cable, and hit upload, wait for the programming to be done. Then you can test it on the keyboard!
 
-If you are compiling for Handspring Visor keyboard, uncomment the line `#define HANDSPRING` in the file `version2_esp32c3.ino`. If you are compiling for Palm III or V, keep it commented out.
+If you are compiling for Handspring Visor keyboard, uncomment the line `#define HANDSPRING` in the file `version2_esp32c3.ino`. If you are compiling for Palm III, V or M500, keep it commented out.
 
 Notes:
 
