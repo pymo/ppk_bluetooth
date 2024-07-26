@@ -4,7 +4,7 @@ Bill of Materials
 ----------
 - [LilyGo TTGO T-OI PLUS ESP32-C3](https://www.aliexpress.us/item/3256803162622213.html) board (no battery holder version, $5.98+shipping)
 - 22 AWG single core wire for making the connector.
-  - or, a [custom made PCB](https://oshwlab.com/project/publish/6843992533c44e27922a81f5a7f3643d) if you are making for Palm M500 keyboards. You can fabricate it yourself, or buy it from my [Tindie store]().
+  - or, a [custom interface PCB](https://oshwhub.com/chen_xin_ming/palm-m500-connector) if you are making for Palm M500 keyboards. You can fabricate it yourself, or buy it from my [Tindie store](https://www.tindie.com/products/35183/).
 - Some thin, flexible wire for the switch connection. I use 30 AWG PVDF insulated single core wire.
 - 802040 Li-Po battery 700mAh (40mm x 20mm x 8mm in dimensions).
 - One travel limit switch, model No. [KFC-V-204F or MS-V-204F](https://www.aliexpress.com/item/3256804072080898.html). Please use this exact model, because the enclosure is specifically designed around it.
