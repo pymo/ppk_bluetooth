@@ -1,8 +1,8 @@
 # Palm Portable Keyboard Bluetooth Adapter
 
-This project is a DIY bluetooth adapter for the Palm Portable Keyboards (PPK), so you can use it with any phone, tablet or laptop that supports BLE (i.e. Bluetooth 4.0 or later). The cost of the materials are around 15~35 US dollars, depending on which version you build.
+This project is a DIY Bluetooth module for the Palm Portable Keyboards (PPK), so you can assemble it to your PPK and use it with any host that supports BLE (Bluetooth 4.0 and later). The cost of the materials are around 15~35 US dollars, depending on which version you build.
 
-I've made a small batch of the version 2 adapter for sale. Here is the link to the product: https://www.tindie.com/products/26595/
+I've made a small batch of the version 3 adapter for sale. Here is the link to the product: https://www.tindie.com/products/26595/
 
 Demo on Youtube:
 
@@ -10,35 +10,26 @@ Demo on Youtube:
 
 This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. 
 
-I've made two versions of the adapter: version 1 is based on an Adafruit Feather nRF52840 Express board, version 2 is based on a LilyGo-T-OI-PLUS ESP32-C3 board. Here are the differences of these two versions, you can choose which one to build. I personally recommend version 2, because it is easier to build and more convenient to charge.
+I've made 3 versions of the adapter: version 1 is based on an Adafruit Feather nRF52840 Express board, version 2 is based on a LilyGo-T-OI-PLUS ESP32-C3 board. version 3 is based on my custom designed CH582F board. Here are the differences of these versions.
 
-|  version 1  |               version 2                |
-| :-------: | :-----------------------------------------------------------------: |
-| nRF52840 chip | ESP32-C3 chip |
-| $25 for the main board | $5 for the main board |
-| Micro-USB charge port | Type-C charge port |
-| Only charges when connected to the keyboard | Charges independently |
-| more power efficient | less power efficient, so needs a larger battery to achieve similar battery life to version 1|
-| more components, harder to solder | less components, easier to solder |
-| has a button to forget the pairing | no button, has to forget the pairing on the host side |
-| no need to sleep | sleeps after idling for 30 minutes to save power, press any key to wake up |
-| Supports Palm III and Palm V keyboards | Supports Palm III, Palm V, Palm M500, and Handspring Visor keyboards |
+version 3 is the current one I sell in my Tindie store. If you want to DIY and don't want to buy my board, you can choose version 2. version 1 is really old and no longer supported.
+
+| version | Build Tutorial | Highlights | 
+| :-------: | :-----------------------------------------------------------------: | :------: |
+| Version 1 | [Tutorial](version1_tutorial.md) | Based on an Adafruit Feather nRF52840 Express board. Rudimentary, no longer supported. Hard to make. Expensive. Micro USB charging. |
+| Version 2 | [Tutorial](version2_tutorial.md) | Based on a LilyGo-T-OI-PLUS ESP32-C3 board. Easy to build, cheap, power hungry, no USB HID support. Type-C charging. |
+| Version 3 | [Tutorial](version3_tutorial.md) | Based on my custom designed PCB using CH582F chip. Easier to build, cheap, power efficient, USB HID support. Multi-host support. Type-C charging. |
 
 - Supported keyboard types
   - Palm III keyboard (p/n P10713U or 3C10317)
-  - Palm V keyboard (p/n 3C10439)
-  - Palm M500 keyboard (p/n P10802U)
+  - Palm V keyboard (p/n 3C10439 or Belkin F8E458)
+  - Palm M500 keyboard (p/n P10802U or Belkin F8P3501)
   - Handspring Visor (Targus PA800 or PA800U)
+- Work in progress
+  - HP Jornada (Targus PA820)
+  - Compaq iPaq PocketPC (Taugus PA840)
 - Unsupported keyboard types
-  - connectors for HP Jornada, Compaq iPaq PocketPC, other PDA/phones, IrDA version.
-
-Tutorials to build the adapter
------------
-
-[How to build the version 1 adapter](version1_tutorial.md)
-
-[How to build the version 2 adapter](version2_tutorial.md).  [Manual of the version 2 adapter](docs/ppk_bluetooth_manual.pdf).
-
+  - connectors for CLIÉ, Treo, other PDA/phones, IrDA version.
 
 Special Key mapping
 -----------
