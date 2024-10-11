@@ -2,7 +2,7 @@
 
 Bill of Materials
 ----------
-- [WCH Micro Kbd board] (you can fabricate it yourself using the gerber file in src/version3_ch582f, or buy one from Tindie (to be stocked).)
+- [WCH Micro Kbd board]. You can fabricate it yourself using the gerber file in src/version3_ch582f, I'll start sell the board on Tindie once the design is finalized. You can buy the fully assembled adapter at https://www.tindie.com/products/26595/.
 - 22 AWG single core wire for making the connector.
   - or, a [custom interface PCB](https://oshwhub.com/chen_xin_ming/palm-m500-connector) if you are making for Palm M500 keyboards. You can fabricate it yourself, or buy it from my [Tindie store](https://www.tindie.com/products/35183/).
 - Some thin, flexible wire for the switch connection. I use 30 AWG PVDF insulated single core wire.
@@ -68,9 +68,7 @@ Insert the wires into the holes of the middle frame, make sure you are inserting
 
 - Handspring: from left to right, pin [1] [5] [6] goes to hole 1, 5, 8
 
-- Palm M500: plug the connector PCB into the middle frame, then put the mainboard+battery assembly on the middle frame, the pins should go through the corresponding pads on main board. Do not solder the pins to the mainboard yet.
-
-![wiring pic](/images/version3/wiring6.jpg)
+- Palm M500: plug the connector PCB into the middle frame, then put the mainboard & battery assembly on the middle frame, the pins should go through the corresponding pads on main board. Do not solder the pins to the mainboard yet.
 
 Glue the two board clips to the middle frame, the board clips hold the board like this:
 
@@ -78,7 +76,9 @@ Glue the two board clips to the middle frame, the board clips hold the board lik
 
 - Palm III, V or Handspring: Trim the wires to suitable length, then bend the wires and fold them inside. This is what contacts the keyboard connector.
 
-- Palm M500: solder the pins to the mainboard, and trim them flat.
+- Palm M500: solder the pins to the mainboard.
+
+![wiring pic](/images/version3/wiring7.jpg)
 
 Put the cap over the middle frame. Make sure it is the correct orientation (the USB type-C port should align with the opening on the cap).
 
