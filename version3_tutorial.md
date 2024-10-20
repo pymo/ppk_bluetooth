@@ -2,7 +2,7 @@
 
 Bill of Materials
 ----------
-- [WCH Micro Kbd board]. You can fabricate it yourself using the gerber file in src/version3_ch582f, I'll start sell the board on Tindie once the design is finalized. You can buy the fully assembled adapter at https://www.tindie.com/products/26595/.
+- [WCH Micro Kbd board](https://github.com/pymo/wch_micro_kbd/), I haven't started selling the board yet. You can fabricate it yourself using the gerber file in [my other repo](https://github.com/pymo/wch_micro_kbd/tree/main/pcb/), or buy one from Tindie (will stock after the design is finalized). You can buy the fully assembled adapter at https://www.tindie.com/products/26595/
 - 22 AWG single core wire for making the connector.
   - or, a [custom interface PCB](https://oshwhub.com/chen_xin_ming/palm-m500-connector) if you are making for Palm M500 keyboards. You can fabricate it yourself, or buy it from my [Tindie store](https://www.tindie.com/products/35183/).
 - Some thin, flexible wire for the switch connection. I use 30 AWG PVDF insulated single core wire.
