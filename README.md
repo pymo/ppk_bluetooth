@@ -6,7 +6,7 @@ I've made a small batch of the version 3 adapter for sale. Here is the link to t
 
 Demo on Youtube:
 
-[![Bluetooth Palm Portable Keyboard demo](http://img.youtube.com/vi/gXvH2a8Eoss/0.jpg)](https://www.youtube.com/watch?v=gXvH2a8Eoss "An Update on the Palm Portable Keyboard Bluetooth Adapter")
+[![Bluetooth Palm Portable Keyboard demo](http://img.youtube.com/vi/qPznzD5e45k/0.jpg)](https://www.youtube.com/watch?v=qPznzD5e45k "Version 3 of my Palm Portable Keyboard Bluetooth Adapter (CH582F based)")
 
 This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. 
 
