@@ -1,8 +1,10 @@
 # How to make the version 3 adapter (CH582F based)
 
+If you don't want to make it yourself, you can skip this tutorial and buy the fully assembled adapter at https://www.tindie.com/products/26595/
+
 Bill of Materials
 ----------
-- [WCH Micro Kbd board](https://github.com/pymo/wch_micro_kbd/), I haven't started selling the board yet. You can fabricate it yourself using the gerber file in [my other repo](https://github.com/pymo/wch_micro_kbd/tree/main/pcb/), or buy one from Tindie (will stock after the design is finalized). You can buy the fully assembled adapter at https://www.tindie.com/products/26595/
+- [WCH Micro Kbd board](https://github.com/pymo/wch_micro_kbd/), you can buy it from my [Tindie store](https://www.tindie.com/products/35183/). You can also fabricate it yourself using the gerber file in [my other repo](https://github.com/pymo/wch_micro_kbd/tree/main/pcb/).
 - 22 AWG single core wire for making the connector.
   - or, a [custom interface PCB](https://oshwhub.com/chen_xin_ming/palm-m500-connector) if you are making for Palm M500 keyboards. You can fabricate it yourself, or buy it from my [Tindie store](https://www.tindie.com/products/35183/).
 - Some thin, flexible wire for the switch connection. I use 30 AWG PVDF insulated single core wire.
@@ -50,6 +52,11 @@ If you are making adapters for Palm M500:
 
 - Use a 5 pin header, solder them to the custom PCB, remove the plastic from the pin header, trim them to 2mm long, put Kapton or electrical tape on the solder joints to insulate.
 
+If you are making adapters for HP Jornada:
+
+- Use a L-shape 5 pin header, trim it and solder it to the custom PCB, put electrical tape on the solder joints to insulate.
+
+
 ![wiring for Palm M500 keyboards](/images/version3/wiring5.jpg)
 
 Solder the positive of the Li-Po battery to pad [BAT+], the negative to pad [BAT-].
@@ -70,13 +77,15 @@ Insert the wires into the holes of the middle frame, make sure you are inserting
 
 - Palm M500: plug the connector PCB into the middle frame, then put the mainboard & battery assembly on the middle frame, the pins should go through the corresponding pads on main board. Do not solder the pins to the mainboard yet.
 
+- HP Jornada: screw the connector PCB into the middle frame, then put the mainboard & battery assembly on the middle frame, the pins should go through the corresponding pads on main board. Do not solder the pins to the mainboard yet.
+
 Glue the two board clips to the middle frame, the board clips hold the board like this:
 
 ![wiring pic](/images/version3/middle_assembly.jpg)
 
 - Palm III, V or Handspring: Trim the wires to suitable length, then bend the wires and fold them inside. This is what contacts the keyboard connector.
 
-- Palm M500: solder the pins to the mainboard.
+- Palm M500 or HP Jornada: solder the pins to the mainboard.
 
 ![wiring pic](/images/version3/wiring7.jpg)
 

@@ -1,8 +1,10 @@
 # Palm Portable Keyboard Bluetooth Adapter
 
-This project is a DIY Bluetooth module for the Palm Portable Keyboards (PPK), so you can assemble it to your PPK and use it with any host that supports BLE (Bluetooth 4.0 and later). The cost of the materials are around 15~35 US dollars, depending on which version you build.
+This project is a DIY Bluetooth module for the Palm Portable Keyboards (PPK), so you can assemble it to your PPK and use it with any host that supports BLE (Bluetooth 4.0 and later).
 
-I've made a small batch of the version 3 adapter for sale. Here is the link to the product: https://www.tindie.com/products/26595/
+Where to buy:
+
+I've made some version 3 adapter for sale. Here is the link to the product: [https://www.tindie.com/products/26595/](https://www.tindie.com/products/26595/)
 
 Demo on Youtube:
 
@@ -12,24 +14,24 @@ This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK 
 
 I've made 3 versions of the adapter: version 1 is based on an Adafruit Feather nRF52840 Express board, version 2 is based on a LilyGo-T-OI-PLUS ESP32-C3 board. version 3 is based on my custom designed CH582F board. Here are the differences of these versions.
 
-version 3 is the current one I sell in my Tindie store. If you want to DIY and don't want to buy my board, you can choose version 2. version 1 is really old and no longer supported.
-
 | version | Build Tutorial | Highlights | 
 | :-------: | :-----------------------------------------------------------------: | :------: |
-| Version 1 | [Tutorial](version1_tutorial.md) | Based on an Adafruit Feather nRF52840 Express board. Rudimentary, no longer supported. Hard to make. Expensive. Micro USB charging. |
-| Version 2 | [Tutorial](version2_tutorial.md) | Based on a LilyGo-T-OI-PLUS ESP32-C3 board. Easy to build, cheap, power hungry, no USB HID support. Type-C charging. |
+| Version 1 | [Tutorial](version1_tutorial.md) | Based on an Adafruit Feather nRF52840 Express board. Experimental, no longer supported. Hard to make. Expensive. Micro USB charging. |
+| Version 2 | [Tutorial](version2_tutorial.md) | Based on a LilyGo-T-OI-PLUS ESP32-C3 board. Easy to build, cheap, power hungry, no USB HID support. Type-C charging. no longer supported. |
 | Version 3 | [Tutorial](version3_tutorial.md) | Based on my custom designed PCB using CH582F chip. Easier to build, cheap, power efficient, USB HID support. Multi-host support. Type-C charging. |
+
+version 3 is the current one I sell in my Tindie store. If you want to DIY and don't want to buy my board, you can choose version 2. version 1 is really old and no longer supported.
 
 - Supported keyboard types
   - Palm III keyboard (p/n P10713U or 3C10317)
   - Palm V keyboard (p/n 3C10439 or Belkin F8E458)
   - Palm M500 keyboard (p/n P10802U or Belkin F8P3501)
-  - Handspring Visor (Targus PA800 or PA800U)
-- Work in progress
+  - Handspring Visor (Targus PA800)
   - HP Jornada (Targus PA820)
-  - Compaq iPaq PocketPC (Taugus PA840)
+  - Sony Clie (Targus PA830)
 - Unsupported keyboard types
-  - connectors for CLIÉ, Treo, other PDA/phones, IrDA version.
+  - connectors for Treo, other PDA/phones, IrDA version.
+  - Compaq iPaq PocketPC (Taugus PA840)
 
 Special Key mapping
 -----------
@@ -38,12 +40,10 @@ Special Key mapping
 - Fn+up for volume up, Fn+down for volume down
 - Fn+left for brightness down, and Fn+right for brightness up.
 - Fn+Cmd is Homepage key (Home button in iOS and Android).
-- Cmd is mapped to super (aka Windows/Apple key).
+- Cmd is mapped to Windows/Apple key.
 - Date is mapped to Home, Phone is mapped to End.
 - To-Do is mapped to PageUp, Memo is mapped to PageDown.
 - Done is mapped to Insert.
-
-If you are using a different keyboard layout, adding to or modifying the mapping is straightforward, just edit the `config_keymap` and `config_fnkeymap` functions in the firmware source code.
 
 Coverage
 -----------
