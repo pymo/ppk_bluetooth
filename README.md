@@ -4,7 +4,7 @@ This project is a DIY Bluetooth module for the Palm Portable Keyboards (PPK), so
 
 Where to buy:
 
-I've made some version 3 adapter for sale. Here is the link to the product: [https://www.tindie.com/products/26595/](https://www.tindie.com/products/26595/)
+I've made some version 3 adapter for sale. Here is the link to the product: [https://www.ebay.com/itm/227307379651](https://www.ebay.com/itm/227307379651)
 
 Demo on Youtube:
 
@@ -20,7 +20,7 @@ I've made 3 versions of the adapter: version 1 is based on an Adafruit Feather n
 | Version 2 | [Tutorial](version2_tutorial.md) | Based on a LilyGo-T-OI-PLUS ESP32-C3 board. Easy to build, cheap, power hungry, no USB HID support. Type-C charging. no longer supported. |
 | Version 3 | [Tutorial](version3_tutorial.md) | Based on my custom designed PCB using CH582F chip. Easier to build, cheap, power efficient, USB HID support. Multi-host support. Type-C charging. |
 
-version 3 is the current one I sell in my Tindie store. If you want to DIY and don't want to buy my board, you can choose version 2. version 1 is really old and no longer supported.
+version 3 is the current one I sell in my online store. If you want to DIY and don't want to buy my board, you can choose version 2. version 1 is really old and no longer supported.
 
 - Supported keyboard types
   - Palm III keyboard (p/n P10713U or 3C10317)
