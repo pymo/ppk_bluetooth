@@ -4,7 +4,7 @@ This project is a DIY Bluetooth module for the Palm Portable Keyboards (PPK), so
 
 Where to buy:
 
-I've made some version 3 adapter for sale. Here is the link to the product: [https://www.ebay.com/itm/227307379651](https://www.ebay.com/itm/227307379651)
+I've made some version 3 adapter for sale. Here is the link to the product: [https://www.tindie.com/products/26595/](https://www.tindie.com/products/26595/)
 
 Demo on Youtube:
 

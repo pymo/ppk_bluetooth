@@ -1,6 +1,6 @@
 # How to make the version 3 adapter (CH582F based)
 
-If you don't want to make it yourself, you can skip this tutorial and buy the fully assembled adapter at https://www.ebay.com/itm/227307379651
+If you don't want to make it yourself, you can skip this tutorial and buy the fully assembled adapter at https://www.tindie.com/products/26595/
 
 Bill of Materials
 ----------
