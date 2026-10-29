@@ -4,34 +4,35 @@ This project is a DIY Bluetooth module for the Palm Portable Keyboards (PPK), so
 
 Where to buy:
 
-I've made some version 3 adapter for sale. Here is the link to the product: [https://www.tindie.com/products/26595/](https://www.tindie.com/products/26595/)
+I've made some version 4 adapter for sale. Here is the link to the product: [https://www.tindie.com/products/26595/](https://www.tindie.com/products/26595/)
 
 Demo on Youtube:
 
 [![Bluetooth Palm Portable Keyboard demo](http://img.youtube.com/vi/qPznzD5e45k/0.jpg)](https://www.youtube.com/watch?v=qPznzD5e45k "Version 3 of my Palm Portable Keyboard Bluetooth Adapter (CH582F based)")
 
-This project is inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. 
+This project was inspired by [cy384](https://github.com/cy384/ppk_usb)'s USB PPK adapter, and [Christian](https://hackaday.io/project/181800-palm-pilot-keyboard-bluetooth-conversion)'s ESP32-based PPK bluetooth adapter. 
 
-I've made 3 versions of the adapter: version 1 is based on an Adafruit Feather nRF52840 Express board, version 2 is based on a LilyGo-T-OI-PLUS ESP32-C3 board. version 3 is based on my custom designed CH582F board. Here are the differences of these versions.
+I've made 4 versions of the adapter: version 1 is based on an Adafruit Feather nRF52840 Express board, version 2 is based on a LilyGo-T-OI-PLUS ESP32-C3 board. version 3 is based on my custom designed CH582F board. version 4 is an internal PCB that directly scan the keyboard matrix. Here are the differences of these versions.
 
 | version | Build Tutorial | Highlights | 
 | :-------: | :-----------------------------------------------------------------: | :------: |
 | Version 1 | [Tutorial](version1_tutorial.md) | Based on an Adafruit Feather nRF52840 Express board. Experimental, no longer supported. Hard to make. Expensive. Micro USB charging. |
 | Version 2 | [Tutorial](version2_tutorial.md) | Based on a LilyGo-T-OI-PLUS ESP32-C3 board. Easy to build, cheap, power hungry, no USB HID support. Type-C charging. no longer supported. |
-| Version 3 | [Tutorial](version3_tutorial.md) | Based on my custom designed PCB using CH582F chip. Easier to build, cheap, power efficient, USB HID support. Multi-host support. Type-C charging. |
+| Version 3 | [Tutorial](version3_tutorial.md) | Based on my custom designed PCB using CH582F chip. Easier to build, cheap, power efficient, USB HID support. Multi-host support. Type-C charging. Discontinued because I used up all the materials. |
+| Version 4 | [Tutorial](version4_tutorial.md) | Internal version that directly replaces the main PCB. With USB HID support. Multi-host support. Type-C charging. Needs disassembling the keyboard to install. |
 
-version 3 is the current one I sell in my online store. If you want to DIY and don't want to buy my board, you can choose version 2. version 1 is really old and no longer supported.
+version 4 is the current one I sell in my online store. If you want to DIY and don't want to buy my board, you can choose version 2. version 1 is really old and no longer supported.
 
-- Supported keyboard types
+- Supported keyboard types (version 4)
+  - All Palm Portable keyboards and its variants, regardless of the connector type
+
+- Supported keyboard types (version 3)
   - Palm III keyboard (p/n P10713U or 3C10317)
   - Palm V keyboard (p/n 3C10439 or Belkin F8E458)
   - Palm M500 keyboard (p/n P10802U or Belkin F8P3501)
   - Handspring Visor (Targus PA800)
   - HP Jornada (Targus PA820)
   - Sony Clie (Targus PA830)
-- Unsupported keyboard types
-  - connectors for Treo, other PDA/phones, IrDA version.
-  - Compaq iPaq PocketPC (Taugus PA840)
 
 Special Key mapping
 -----------
