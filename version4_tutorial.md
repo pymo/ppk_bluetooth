@@ -30,15 +30,15 @@ There is one screw under the label, and two on the other side, remove the 3 scre
 
 Remove the plastic cap, you can see the original PCB and the keyboard flex cables.
 
-![PCB removal](/images/version4/PCB_removal.jpg)
-
 Hold the PCB, rotate it downwards to peel flex cables off of it. Be gentle, do not use excess force and tear the cables.
+
+![PCB removal](/images/version4/PCB_removal.jpg)
 
 There are some glue residue on the back side of the flex cable, use your finger nail to gentlely scrape them off. Leave a clean surface under the flex.
 
 ![glue removal](/images/version4/glue_removal.jpg)
 
-Remove one side of the film on the Z-axis double sided tape, then place it on the golder contacts of the new PCB. Be careful not to scramble the tape during the process.
+Remove one side of the film on the Z-axis double sided tape, then place it on the golden contacts of the new PCB. Be careful not to scramble the tape during the process.
 
 ![zaxis tape install](/images/version4/zaxis_install.jpg)
 
@@ -56,7 +56,9 @@ Place the 3-D printed enclosure onto the PCB. Screw the 3 screws.
 
 ![enclosure install](/images/version4/enclosure_install.jpg)
 
-Test the keyboard by pairing it to a phone or PC, and test all the keys to make sure they are working. One common failure is that the Z-axis tape did not get enough clamping force, some traces are not contacting properly, so some keys are not working. Try to press on the enclosure's bottom part to get a better contact.
+Test the keyboard by pairing it to a phone or PC, and test all the keys to make sure they are working.
+
+*One common failure* is that the Z-axis tape did not get enough clamping force, some traces are not contacting properly, so some keys are not working. Try to press on the enclosure's bottom part to get a better contact.
 
 If everything works well, install the metal label back. And you are done!
 
