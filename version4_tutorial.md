@@ -20,7 +20,7 @@ Assembly Process
 
 Solder the battery to the PCB. (If you bought from me, this step is already done.)
 
-There is a product label at the back side of the keyboard. It is a metal sheet. Use the utility knife to lift open the corner, then peel it off. Do not bend it too much, we need to install it back later.
+There is a product label at the back side of the keyboard. It is a metal sheet. Use the utility knife to lift open the corner, then peel it off. Do not bend it too much, we need to install it back later. Also be careful with the black paint, it is easy to scratch with the knife.
 
 ![label removal](/images/version4/label_removal.jpg)
 
@@ -29,6 +29,8 @@ There is one screw under the label, and two on the other side, remove the 3 scre
 ![screw removal](/images/version4/screw_removal.jpg)
 
 Remove the plastic cap, you can see the original PCB and the keyboard flex cables.
+> [!NOTE]
+> The plastic cap is likely to be glued to the original PCB (lower-left corner)
 
 Hold the PCB, rotate it downwards to peel flex cables off of it. Be gentle, do not use excess force and tear the cables.
 
