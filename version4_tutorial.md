@@ -29,6 +29,8 @@ There is one screw under the label, and two on the other side, remove the 3 scre
 ![screw removal](/images/version4/screw_removal.jpg)
 
 Remove the plastic cap, you can see the original PCB and the keyboard flex cables.
+> [!NOTE]
+> The plastic cap is likely to be glued to the original PCB (lower-left corner)
 
 Hold the PCB, rotate it downwards to peel flex cables off of it. Be gentle, do not use excess force and tear the cables.
 
