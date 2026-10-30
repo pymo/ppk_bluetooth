@@ -20,7 +20,7 @@ Assembly Process
 
 Solder the battery to the PCB. (If you bought from me, this step is already done.)
 
-There is a product label at the back side of the keyboard. It is a metal sheet. Use the utility knife to lift open the corner, then peel it off. Do not bend it too much, we need to install it back later.
+There is a product label at the back side of the keyboard. It is a metal sheet. Use the utility knife to lift open the corner, then peel it off. Do not bend it too much, we need to install it back later. Also be careful with the black paint, it is easy to scratch with the knife.
 
 ![label removal](/images/version4/label_removal.jpg)
 
